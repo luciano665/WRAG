@@ -1,0 +1,36 @@
+# 1. Install dependencies
+pip install pinecone-client sentence-transformers
+
+# 2. Setup and Initialize Pinecone client
+import pinecone
+from sentence_transformers import SentenceTransformer
+
+# Replace with your credentials
+api_key = "API_KEY"
+env = "ENVIRONMENT"
+
+pinecone.init(api_key=api_key, environment=env)
+index = pinecone.Index("my-index")  # Name of your index from Pinecone dashboard
+
+# 3. Load embedding model
+model = SentenceTransformer("BAAI/bge-base-en-v1.5")
+
+def embed(texts):
+    return model.encode(texts, normalize_embeddings=True)  # normalize for cosine similarity
+
+# 4. Encode user query and search/return top-k
+query = "This is a test query."
+query_vector = embed([query])[0]
+
+# Search top-k similar docs
+search_result = index.query(
+    vector=query_vector,
+    top_k=5,
+    include_metadata=True
+)
+
+for match in search_result['matches']:
+    print("ID:", match['id'])                   # vector ID (e.g., "doc-3")
+    print("Score:", match['score'])             # cosine similarity score
+    print("Text:", match['metadata']['text'])   # original document text
+    print("---")
