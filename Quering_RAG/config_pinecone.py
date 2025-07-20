@@ -1,4 +1,4 @@
-# config.py
+# config_pinecone.py
 
 API_KEY = "your-pinecone-api-key"
 ENVIRONMENT = "your-environment"
