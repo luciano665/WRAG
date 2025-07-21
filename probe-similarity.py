@@ -2,6 +2,7 @@ from openai import OpenAI
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+import os
 
 # ---- SETUP ----
 
@@ -11,7 +12,7 @@ embed_model = SentenceTransformer('multi-qa-mpnet-base-dot-v1')
 # 2. Set up OpenRouter LLM API
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key= "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"  
+    api_key= os.getenv('OPENROUTER_API_KEY') 
 )
 # ---- FUNCTION: Generate N Probes ----
 
