@@ -18,7 +18,7 @@ from sentence_transformers import SentenceTransformer
 from tqdm.auto import tqdm
 
 # --- CONFIG ------------------------------------------------------------------
-PINECONE_API_KEY = "**insert your key here**"
+PINECONE_API_KEY = "pcsk_393uFT_EoJvwP6wuWxRnb2Eu7tYeDnY1kY3qgYm6QpRfLYXLrTPC2zXK3C6fDugemeRhJU"
 PINECONE_REGION  = "us-east-1"
 INDEX_NAME       = "wrag-v3"
 NAMESPACE        = "ragbench"
