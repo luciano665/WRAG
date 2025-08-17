@@ -3,15 +3,21 @@ import itertools
 from pinecone import Pinecone
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Config for Pinecone and env
 
-PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
-PINECONE_ENV = os.getenv('PINECONE_ENV')
+PINECONE_API_KEY="pcsk_2mE6zj_AP8ycdGJHwDn1z539GZdxJJqu1rLxt5c5MD7J9MjyihEKeSosUGr6bQuHKfuqRE"
+PINECONE_ENV="us-east-1-aws"
+
+
+
 
 # Get index name from env
-PINECONE_INDEX = os.getenv('PINECONE_INDEX')
 
+PINECONE_INDEX="wrag-v2"
 # Batch size for embed/upsert at one
 BATCH_SIZE = 64
 
@@ -54,17 +60,14 @@ def docs_generator(split="train"):
     tuples of (unique_id, document_text, metadata payload).
     """
     for subset in SUBSETS:
-        # Stream the HF dataset for current subset
         ds = load_dataset("galileo-ai/ragbench", subset, split=split, streaming=True)
-        # create tuples
         for example in ds:
-            ex_id = example['id'] # Unique identifier for that docs
+            ex_id = example['id']
             for doc_text in example['documents']:
-                # Construct of uniqye ID for each doc piece
                 unique_id = str(next(_id_counter))
-                # Metadata pyload to store with each vector
-                payload = {"subset": subset, "example_id": ex_id}
-                yield unique_id, doc_text, payload # generator yiled tuple
+                payload = {"subset": subset, "example_id": ex_id, "text": doc_text}   # <-- ADD "text": doc_text here!
+                yield unique_id, doc_text, payload
+
 
 # Ingestion into Pinecone
 print("⏳ Beginning to embed & upsert RAGBench documents…")
