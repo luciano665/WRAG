@@ -8,7 +8,7 @@ from typing import Iterable, List, Optional, Sequence, Tuple
 
 
 # Auto install hook if not already installed
-def _ensure_datsets_installed(auto_install: bool):
+def _ensure_datasets_installed(auto_install: bool):
     try:
         import datasets
     except Exception as e:
@@ -88,7 +88,7 @@ def get_ragbench_questions(
         include_ids: if True -> JSON strings with {"id", "question"}. Else raw question strings.
         auto_install: if True, tries `pip install datasets` if missing.
     """
-    _ensure_datsets_installed(auto_install=auto_install)
+    _ensure_datasets_installed(auto_install=auto_install)
     hf_token = _get_hf_token()
 
     if subsets is None:
@@ -112,3 +112,41 @@ def get_ragbench_questions(
             else:
                 out.extend(ds["question"])
     return out
+
+def get_ragbench_questions_df(
+    subsets: Optional[Sequence[str]] = None,
+    splits: Sequence[str] = DEFAULT_SPLITS,
+    auto_install: bool = False,
+):
+    """
+    Return a pandas.DataFrame with columns [subset, split, id, question].
+    """
+    _ensure_datasets_installed(auto_install=auto_install)
+    try:
+        import pandas as pd
+    except Exception as e:
+        raise RuntimeError(
+            "`pandas` is required for get_ragbench_questions_df. Install via: pip install pandas"
+        ) from e
+    
+    hf_token = _get_hf_token()
+    if subsets is None:
+        subsets = DEFAULT_SUBSETS
+    
+    rows = []
+    for subset in subsets:
+        for split in splits:
+            try:
+                ds = _load_with_owner_fallback(subset, split, hf_token)
+            except Exception:
+                continue
+            if "question" not in ds.column_names:
+                continue
+
+            ids = ds["id"] if "id" in ds.column_names else [None] * len(ds)
+            for _id, q in zip(ids, ds["question"]):
+                rows.append({"subset": subset, "split": split, "id": _id, "question": q})
+    
+    return pd.DataFrame(rows, columns=["subset", "split", "id", "questions"])
+
+# CLI
