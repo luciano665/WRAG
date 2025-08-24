@@ -72,3 +72,43 @@ def _load_with_owner_fallback(subset: str, split: str, hf_token: Optional[str]):
         f"Could not load RAGBench for subset='{subset}', split='{split}' "
         f"from either galileo-ai/ragbench or rungalileo/ragbench."
     )
+
+def get_ragbench_questions(
+    subsets: Optional[Sequence[str]] = None,
+    splits: Sequence[str] = DEFAULT_SPLITS,
+    include_ids: bool = False,
+    auto_install: bool = False,
+) -> List[str]:
+    """
+    Return a flat list of questions across requested subsets & splits.
+
+    Args:
+        subsets: list like ["hotpotqa"]. If None, uses DEFAULT_SUBSETS.
+        splits: iterable of split names; default: ("train","validation","test")
+        include_ids: if True -> JSON strings with {"id", "question"}. Else raw question strings.
+        auto_install: if True, tries `pip install datasets` if missing.
+    """
+    _ensure_datsets_installed(auto_install=auto_install)
+    hf_token = _get_hf_token()
+
+    if subsets is None:
+        subsets = DEFAULT_SUBSETS
+
+    out: List[str] = []
+    for subset in subsets:
+        for split in splits:
+            try:
+                ds = _load_with_owner_fallback(subset, split, hf_token)
+            except Exception:
+                continue
+
+            if "question" not in ds.column_names:
+                continue
+
+            if include_ids:
+                ids = ds["id"] if "id" in ds.column_names else [None] * len(ds)
+                for _id, q in zip(ids, ds["question"]):
+                    out.append(json.dumps({"id": _id, "question": q}, ensure_ascii=False))
+            else:
+                out.extend(ds["question"])
+    return out
