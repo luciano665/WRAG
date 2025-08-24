@@ -150,3 +150,35 @@ def get_ragbench_questions_df(
     return pd.DataFrame(rows, columns=["subset", "split", "id", "questions"])
 
 # CLI
+def _parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Export RAGBench questions")
+    p.add_argument("--subset", action="append", help="Subset name (repeatable), e.g. --subset hotpotqa")
+    p.add_argument("--split", action="append", help="Split(s) to include (repeatable). Default: train,validation,test")
+    p.add_argument("--include-ids", action="store_true", help="Emit JSONL {id, question} lines")
+    p.add_argument("--out", type=str, default="-", help="Output file path or '-' for stdout (default)")
+    p.add_argument("--auto-install", action="store_true", help="Auto-install `datasets` if missing")
+    return p.parse_args()
+
+def main_cli():
+    args = _parse_args()
+    splits = tuple(args.split) if args.split else DEFAULT_SPLITS
+    subsets = args.subset or None
+
+    lines = get_ragbench_questions(
+        subsets=subsets,
+        splits=splits,
+        include_ids=args.include_ids,
+        auto_install=args.auto_install,
+    )
+
+    if args.out == "-":
+        for line in lines:
+            print(line if isinstance(line, str) else str(line))
+    else:
+        with open(args.out, "w", encoding="utf-8") as f:
+            for line in lines:
+                f.write((line if isinstance(line, str) else str(line)) + "\n")
+        print(f"Wrote {len(lines)} lines to {args.out}")
+
+if __name__ == "__main__":
+    main_cli()
