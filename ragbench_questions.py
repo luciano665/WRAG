@@ -147,7 +147,7 @@ def get_ragbench_questions_df(
             for _id, q in zip(ids, ds["question"]):
                 rows.append({"subset": subset, "split": split, "id": _id, "question": q})
     
-    return pd.DataFrame(rows, columns=["subset", "split", "id", "question"])
+    return pd.DataFrame(rows, columns=["subset", "split", "id", "questions"])
 
 # CLI
 def _parse_args() -> argparse.Namespace:
