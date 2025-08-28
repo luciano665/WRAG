@@ -38,6 +38,12 @@ import time, random
 import google.generativeai as genai
 from google.api_core.exceptions import ResourceExhausted
 
+# RAGBench quenstion helper
+try:
+    from ragbench_questions import get_ragbench_questions
+except Exception as e:
+    get_ragbench_questions = None
+
 GEMINI_KEY   = os.getenv("GEMINI_API_KEY", "realkey")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 genai.configure(api_key=GEMINI_KEY)
@@ -124,6 +130,20 @@ def main():
         description="WRAG: run probe stage, reweigh, and final answer generation."
     )
     parser.add_argument("-q", "--question", type=str, help="Question to process.")
+
+    # RAGBench batch mode flags
+    parser.add_argument("--ragbench", action="store_true",
+                        help="Pull questions from RAGBench instead of --question.")
+    parser.add_argument("--rb-subset", action="append",
+                        help="RAGBench subset(s), repeatable. Ex: --rb-subset hotpotqa")
+    parser.add_argument("--rb-split", action="append",
+                        help="RAGBench split(s), repeatable. Ex: --rb-split validation")
+    parser.add_argument("--rb-limit", type=int, default=10,
+                        help="How many RAGBench questions to run (default: 10)")
+    parser.add_argument("--rb-auto-install", action="store_true",
+                        help="Auto-install `datasets` in ragbench helper if missing")
+
+    # Retrieval controls
     parser.add_argument("--top-k", type=int, default=5, help="Top-K docs to retrieve (unique) (default: 5).")
     parser.add_argument("--n-probes", type=int, default=5, help="Number of keyword probes (default: 5).")
     parser.add_argument("--show-matrix", action="store_true", help="Print full probe similarity matrix.")
@@ -179,6 +199,147 @@ def main():
         cfgs = [c.strip() for c in args.allow_configs.split(",") if c.strip()]
         if cfgs:
             metadata_filter = {"config": {"$in": cfgs}}
+    
+    # RAGBench batch
+    if args.ragbench:
+        if get_ragbench_questions is None:
+            raise SystemExit("ragbench_qeustion.py not found or import failed.")
+        
+        subsets = args.rb_subsset or None
+        splits = tuple(args.rb_split) if args.rb_split else ("train", "validation", "test")
+
+        try:
+            questions = get_ragbench_questions(
+                subsets=subsets,
+                splits=splits,
+                auto_install=args.rb_auto_install
+            )
+        except Exception as e:
+            raise SystemExit(f"Failed to load RAGBench questions: {e}")
+        
+        if not questions:
+            raise SystemExit("No RAGBench questions found for requested subsets/splits.")
+        
+        limit = max(1, int(args.rb_limit))
+        print(f"[RAGBench] Running on {min(limit, len(questions))} / {len(questions)} questions "
+              f"(subsets={subsets or 'ALL'}, splits={splits})")
+            
+        
+        for idx, q in enumerate(questions[:limit], start=1):
+            question = q.strip()
+            if not question:
+                continue
+
+            print(f"\n========== RAGBench Q{idx}: {question} ==========")
+
+            # === Probe Stage ===
+            stage = run_probe_stage(
+                question,
+                top_k=args.top_k,
+                n_probes=args.n_probes,
+                metadata_filter=metadata_filter
+            )
+
+            print("\n=== WRAG • Probe Stage ===")
+            print("Question:", stage["question"])
+            print("Probes:")
+            for i, p in enumerate(stage["probes"], 1):
+                print(f"  {i}. {p}")
+            print("Mean probe similarity:", round(stage["mean_probe_similarity"], 3))
+
+            if args.show_matrix:
+                sim = stage["probe_similarity_matrix"]
+                print("\nProbe similarity matrix (rounded):")
+                print(np.round(sim, 2))
+
+            # === Reweigh Stage ===
+            ranked = compute_doc_weights(
+                pinecone_results=stage["pinecone_results"],
+                probes=stage["probes"],
+                mean_probe_similarity=stage["mean_probe_similarity"],
+                alpha=args.alpha,
+                beta=args.beta,
+                gamma=args.gamma,
+                citation_top_n=args.citation_top_n,
+                citation_sim_threshold=args.citation_sim_threshold,
+            )
+
+            print("\n=== WRAG • Reweigh Stage ===")
+            if not ranked:
+                print("No documents to reweigh.")
+            else:
+                show_n = min(args.top_m, len(ranked))
+                print(f"Top {show_n} documents by final_weight:")
+                header = f"{'#':>2}  {'final_w':>8}  {'cites':>5}  {'red':>5}  {'retr':>6}  id / preview"
+                print(header)
+                print("-" * len(header))
+                for i, d in enumerate(ranked[:show_n], 1):
+                    preview = (d['text'][:97] + '...') if len(d['text']) > 100 else d['text']
+                    print(f"{i:>2}  {d['final_weight']:>8.3f}  {d['citation_count']:>5}  "
+                          f"{d['redundancy_penalty']:>5.2f}  {d['retrieval_score']:>6.3f}  "
+                          f"{d['id']}  |  {preview}")
+
+            # Save probe+reweigh JSON (optional) — NOTE: this overwrites for each Q if you reuse the same path
+            if args.save:
+                os.makedirs(os.path.dirname(args.save) or ".", exist_ok=True)
+                payload = {
+                    "question": stage["question"],
+                    "probes": stage["probes"],
+                    "mean_probe_similarity": stage["mean_probe_similarity"],
+                    "probe_similarity_matrix": to_serializable(stage["probe_similarity_matrix"]) if args.show_matrix else None,
+                    "ranked_docs": [
+                        {
+                            "id": d["id"],
+                            "final_weight": d["final_weight"],
+                            "citation_count": d["citation_count"],
+                            "redundancy_penalty": d["redundancy_penalty"],
+                            "retrieval_score": d["retrieval_score"],
+                            "text": d["text"],
+                        }
+                        for d in ranked[:args.top_m]
+                    ],
+                    "hyperparams": {
+                        "alpha": args.alpha,
+                        "beta": args.beta,
+                        "gamma": args.gamma,
+                        "citation_top_n": args.citation_top_n,
+                        "citation_sim_threshold": args.citation_sim_threshold,
+                        "top_k": args.top_k,
+                        "n_probes": args.n_probes,
+                        "metadata_filter": metadata_filter,
+                    },
+                }
+                payload = {k: v for k, v in payload.items() if v is not None}
+                with open(args.save, "w", encoding="utf-8") as f:
+                    json.dump(payload, f, ensure_ascii=False, indent=2)
+                print(f"\nSaved results to: {args.save}")
+
+            # === Final Answer Stage (default run unless --no-final) ===
+            if not args.no_final:
+                if not ranked:
+                    print("Skipping final answer: no ranked docs.")
+                else:
+                    print("\n=== WRAG • Final Answer Generation ===")
+                    answer_text = generate_final_answer(
+                        question=question,
+                        weighted_docs=ranked[:args.top_m],
+                        model_name=args.ans_model,
+                        top_m_docs=args.top_m,
+                        doc_char_lim=args.ans_doc_char_limit,
+                        temperature=args.ans_temp,
+                        max_output_tokens=args.ans_max_tokens
+                    )
+                    print("\nModel output (expected JSON):")
+                    print(answer_text)
+
+                    if args.save_answer:
+                        os.makedirs(os.path.dirname(args.save_answer) or ".", exist_ok=True)
+                        with open(args.save_answer, "w", encoding="utf-8") as f:
+                            f.write(answer_text if isinstance(answer_text, str) else json.dumps(answer_text))
+                        print(f"\nSaved final answer to: {args.save_answer}")
+
+        return 
+
 
     question = args.question or input("Enter your question: ").strip()
     if not question:
