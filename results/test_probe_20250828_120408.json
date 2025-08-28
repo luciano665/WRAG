@@ -1,0 +1,117 @@
+{
+  "question": "Where did the first known cases of MERS occur?",
+  "subset": "covidqa",
+  "top_k": 5,
+  "n_probes": 5,
+  "result": {
+    "question": "Where did the first known cases of MERS occur?",
+    "probes": [
+      "first, known, 2012",
+      "occur, mers, Where",
+      "respiratory, reported, Where",
+      "retrospectively, epidemiology, Where",
+      "diagnostics, infections, Where"
+    ],
+    "mean_probe_similarity": 0.42621907591819763,
+    "probe_similarity_matrix": [
+      [
+        0.9999997019767761,
+        0.34791994094848633,
+        0.41866618394851685,
+        0.37071549892425537,
+        0.3209511339664459
+      ],
+      [
+        0.34791994094848633,
+        1.000000238418579,
+        0.4492323696613312,
+        0.3931885361671448,
+        0.404877245426178
+      ],
+      [
+        0.41866618394851685,
+        0.4492323696613312,
+        1.0,
+        0.482500821352005,
+        0.5463646650314331
+      ],
+      [
+        0.37071549892425537,
+        0.3931885361671448,
+        0.482500821352005,
+        1.0000001192092896,
+        0.5277740955352783
+      ],
+      [
+        0.3209511339664459,
+        0.404877245426178,
+        0.5463646650314331,
+        0.5277740955352783,
+        0.9999998211860657
+      ]
+    ],
+    "pinecone_results": {
+      "matches": [
+        {
+          "id": "1162_covidqa_2_0",
+          "score": 0.751599371,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 2.0,
+            "example_id": "1162",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown"
+          }
+        },
+        {
+          "id": "1170_covidqa_1_0",
+          "score": 0.751599371,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 1.0,
+            "example_id": "1170",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown"
+          }
+        },
+        {
+          "id": "141_covidqa_0_0",
+          "score": 0.751599371,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 0.0,
+            "example_id": "141",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown"
+          }
+        },
+        {
+          "id": "78_covidqa_3_0",
+          "score": 0.751599371,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 3.0,
+            "example_id": "78",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown"
+          }
+        }
+      ],
+      "namespace": "ragbench",
+      "usage": {
+        "read_units": 1
+      }
+    },
+    "top_docs": [
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown",
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown",
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown",
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown"
+    ]
+  },
+  "saved_at": "2025-08-28 12:04:21"
+}

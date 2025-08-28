@@ -1,0 +1,2110 @@
+{
+  "run_metadata": {
+    "dataset": {
+      "subset": "covidqa",
+      "split": "validation",
+      "limit": 10
+    },
+    "hardware": {
+      "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+      "ram_gb": 15.24,
+      "gpu_name": null,
+      "gpu_driver": null,
+      "storage_fs_type": "NTFS"
+    },
+    "software": {
+      "python": "3.12.5",
+      "os": "Windows 11",
+      "torch": "2.8.0+cpu",
+      "cuda_version": null,
+      "cudnn_version": null,
+      "datasets": "4.0.0",
+      "psutil": "7.0.0",
+      "pynvml": null,
+      "transformers": "4.53.2",
+      "nanovllm": null,
+      "commit_sha": "10999b0"
+    },
+    "models": {
+      "backend": "nano-vllm",
+      "nano_model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca",
+      "pricing_input_per_1k": null,
+      "pricing_output_per_1k": null,
+      "sampler_defaults": {
+        "temperature": 0.2,
+        "max_new_tokens": 256
+      },
+      "cuda": {
+        "torch": "2.8.0+cpu",
+        "cuda_version": null,
+        "cudnn_version": null,
+        "cuda_available": false,
+        "device_count": 0,
+        "current_device": null
+      },
+      "engine_defaults": {
+        "tensor_parallel_size": 1,
+        "enforce_eager": false
+      }
+    },
+    "retrieval_config": {
+      "embedder": null,
+      "index_name": "wrag-v3",
+      "namespace": "ragbench",
+      "chunking": null,
+      "reranker": null,
+      "wrag_hyperparams": {
+        "alpha": 1.0,
+        "beta": 0.6,
+        "gamma": 0.5,
+        "citation_top_n": null,
+        "citation_sim_threshold": 0.35,
+        "top_k": 5,
+        "n_probes": 5,
+        "top_m": 5
+      },
+      "router_policy": null
+    },
+    "env_missing": []
+  },
+  "queries": [
+    {
+      "qid": "1033",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "Where was alpha-tubulin found least abundantly in the cell?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 3.350013867020607e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "alpha-tubulin, nuclear fraction, nucleolar fraction",
+          "alpha-tubulin, cytoplasmic fraction, nuclear fraction",
+          "alpha-tubulin, nucleolus, nucleus",
+          "alpha-tubulin, cell nucleus, nucleolar fraction",
+          "alpha-tubulin, nuclear, nucleoplasmic fraction"
+        ],
+        "mean_probe_similarity": 0.8629758954048157,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1032_covidqa_3_0",
+            "retrieval_score": 0.674411356,
+            "final_weight": 3.4931522011756897,
+            "citation_count": 5,
+            "redundancy_penalty": 0.739647388458252,
+            "text_preview": "title : quantitative phosphoproteomics of proteasome inhibition in multiple myeloma cells passage : to investigate whether these bortezomib - induced changes in the tubulin polymerization were mediate…"
+          },
+          {
+            "id": "1032_covidqa_2_0",
+            "retrieval_score": 0.709556401,
+            "final_weight": 3.486987590789795,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7519766092300415,
+            "text_preview": "title : imaging, tracking and computational analyses of virus entry and egress with the cytoskeleton passage : microtubules are polarized filaments formed by tubulins and microtubule - associated prot…"
+          },
+          {
+            "id": "1032_covidqa_0_0",
+            "retrieval_score": 0.688875496,
+            "final_weight": 3.4540154337882996,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8179209232330322,
+            "text_preview": "title : nucleolar protein trafficking in response to hiv - 1 tat : rewiring the nucleolus passage : in the mixed nucleolar fraction. of note, nucleolin was equally distributed between the nuclear and …"
+          },
+          {
+            "id": "600_covidqa_1_0",
+            "retrieval_score": 0.652350366,
+            "final_weight": 3.4540154337882996,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8179209232330322,
+            "text_preview": "title : heterogeneous nuclear ribonucleoprotein a1 regulates rna synthesis of a cytoplasmic virus passage : of differences were observed for the n protein in these three cell lines. actin levels in di…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 4.791701699607074,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.6217379001900554,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 0.0004823002964258194,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 0.000519199762493372,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": false,
+        "parts": null
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "1273",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What does the semicontaminated area include?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 3.460003063082695e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "Age, Gender, Role",
+          "Birds, Handwashing, Hygiene",
+          "Contamination, Proportions, Variables",
+          "Limited, Power, Differences",
+          "PPE, Donning, Doffing"
+        ],
+        "mean_probe_similarity": 0.3423488140106201,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "124_covidqa_0_0",
+            "retrieval_score": 0.655786395,
+            "final_weight": 2.9348390102386475,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8150196075439453,
+            "text_preview": "title : the trojan chicken study, minnesota passage : some of our study findings were unanticipated. we expected contamination proportions to vary by age, gender, and role because we expected these fa…"
+          },
+          {
+            "id": "1275_covidqa_1_0",
+            "retrieval_score": 0.639060497,
+            "final_weight": 2.9348390102386475,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8150196075439453,
+            "text_preview": "title : contamination during doffing of personal protective equipment by healthcare providers passage : a demographic survey was performed with all participants. the survey also included questions on …"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 2.221137899905443,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.28209610003978014,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 1.9199680536985397e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 3.4899916499853134e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": true,
+        "parts": [
+          {
+            "sub_question": "What does the semicontaminated area include?",
+            "prompt_template_id": "qa_json_v2",
+            "retriever_settings": {
+              "top_k": 5,
+              "n_probes": 5,
+              "filters": {
+                "config": {
+                  "$in": [
+                    "covidqa"
+                  ]
+                }
+              }
+            },
+            "probes": [
+              "Minnesota, Trojan, Chicken",
+              "Study, Findings, Unanticipated",
+              "Age, Gender, Role",
+              "Contamination, Proportions, Variables",
+              "Hygiene, Handlers, Environment"
+            ],
+            "mean_probe_similarity": 0.3433055579662323,
+            "retrieved_doc_ids": [
+              "matches",
+              "namespace",
+              "usage"
+            ],
+            "ranked_docs_sent": [
+              {
+                "id": "124_covidqa_0_0",
+                "retrieval_score": 0.655786395,
+                "final_weight": 2.9357957541942596,
+                "citation_count": 5,
+                "redundancy_penalty": 0.8150196075439453,
+                "text_preview": "title : the trojan chicken study, minnesota passage : some of our study findings were unanticipated. we expected contamination proportions to vary by age, gender, and role because we expected these fa…"
+              },
+              {
+                "id": "1275_covidqa_1_0",
+                "retrieval_score": 0.639060497,
+                "final_weight": 2.9357957541942596,
+                "citation_count": 5,
+                "redundancy_penalty": 0.8150196075439453,
+                "text_preview": "title : contamination during doffing of personal protective equipment by healthcare providers passage : a demographic survey was performed with all participants. the survey also included questions on …"
+              }
+            ],
+            "stages": {
+              "probe": {
+                "duration_s": 2.149440100416541,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "reweigh": {
+                "duration_s": 0.2812570999376476,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "prompt_build": {
+                "duration_s": 2.090027555823326e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "generate": {
+                "duration_s": 3.8499943912029266e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              }
+            },
+            "llm": {
+              "engine": {
+                "backend": "nano-vllm",
+                "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+              },
+              "usage": {},
+              "timing": {
+                "ttft_ms": null,
+                "gen_ms": null
+              },
+              "cost_usd": null,
+              "output_text": null,
+              "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+            },
+            "router_logs": {
+              "policy": null,
+              "decision": null,
+              "notes": null
+            }
+          }
+        ]
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "1667",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "As of 26 January 2020, what countries had sporadic cases?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 1.729978248476982e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "COVID-19, Europe, January",
+          "Cases, February, Asia",
+          "WHO, Region, Deaths",
+          "Italy, Outbreak, Transmission",
+          "Municipalities, Northern, Cases"
+        ],
+        "mean_probe_similarity": 0.40284666419029236,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1323_covidqa_1_0",
+            "retrieval_score": 0.738310039,
+            "final_weight": 2.9283305406570435,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9490322470664978,
+            "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : have been mild."
+          },
+          {
+            "id": "1570_covidqa_0_0",
+            "retrieval_score": 0.719544828,
+            "final_weight": 2.9283305406570435,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9490322470664978,
+            "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : as at 09 : 00 on 21 february, few covid - 19 cases had been detected…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 1.8888979000039399,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.28011099994182587,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 1.659989356994629e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 3.2700132578611374e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": true,
+        "parts": [
+          {
+            "sub_question": "As of 26 January 2020, what countries had sporadic cases?",
+            "prompt_template_id": "qa_json_v2",
+            "retriever_settings": {
+              "top_k": 5,
+              "n_probes": 5,
+              "filters": {
+                "config": {
+                  "$in": [
+                    "covidqa"
+                  ]
+                }
+              }
+            },
+            "probes": [
+              "COVID-19, Europe, Asia",
+              "Coronavirus, cases, February",
+              "Italy, outbreak, transmission",
+              "deaths, countries, region",
+              "WHO, Europe, January"
+            ],
+            "mean_probe_similarity": 0.4432079792022705,
+            "retrieved_doc_ids": [
+              "matches",
+              "namespace",
+              "usage"
+            ],
+            "ranked_docs_sent": [
+              {
+                "id": "1323_covidqa_1_0",
+                "retrieval_score": 0.738310039,
+                "final_weight": 2.9686918556690216,
+                "citation_count": 5,
+                "redundancy_penalty": 0.9490322470664978,
+                "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : have been mild."
+              },
+              {
+                "id": "1570_covidqa_0_0",
+                "retrieval_score": 0.719544828,
+                "final_weight": 2.9686918556690216,
+                "citation_count": 5,
+                "redundancy_penalty": 0.9490322470664978,
+                "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : as at 09 : 00 on 21 february, few covid - 19 cases had been detected…"
+              }
+            ],
+            "stages": {
+              "probe": {
+                "duration_s": 2.1341947996988893,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "reweigh": {
+                "duration_s": 0.30639589997008443,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "prompt_build": {
+                "duration_s": 1.9199680536985397e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "generate": {
+                "duration_s": 3.319978713989258e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              }
+            },
+            "llm": {
+              "engine": {
+                "backend": "nano-vllm",
+                "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+              },
+              "usage": {},
+              "timing": {
+                "ttft_ms": null,
+                "gen_ms": null
+              },
+              "cost_usd": null,
+              "output_text": null,
+              "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+            },
+            "router_logs": {
+              "policy": null,
+              "decision": null,
+              "notes": null
+            }
+          }
+        ]
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "1160",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "Where did the first known cases of Middle East respiratory syndrome (MERS) occur?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.659996971487999e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "MERS, Jordan, 2012",
+          "Jeddah, Saudi Arabia, 2012",
+          "Middle East, respiratory syndrome, coronavirus",
+          "novel coronavirus, human infections, Arabian Peninsula",
+          "camel reservoir, virus transmission, rare infections"
+        ],
+        "mean_probe_similarity": 0.4794655740261078,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1170_covidqa_1_0",
+            "retrieval_score": 0.794077635,
+            "final_weight": 3.479465574026108,
+            "citation_count": 5,
+            "redundancy_penalty": 0.0,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, …"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 2.0737386997789145,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.1851889998652041,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 1.1600088328123093e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 2.71000899374485e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": true,
+        "parts": [
+          {
+            "sub_question": "Where did the first known cases of Middle East respiratory syndrome (MERS) occur?",
+            "prompt_template_id": "qa_json_v2",
+            "retriever_settings": {
+              "top_k": 5,
+              "n_probes": 5,
+              "filters": {
+                "config": {
+                  "$in": [
+                    "covidqa"
+                  ]
+                }
+              }
+            },
+            "probes": [
+              "MERS, Jordan, 2012",
+              "Jeddah, Saudi Arabia, 2012",
+              "Middle East, Respiratory Syndrome, Coronavirus",
+              "Novel Coronavirus, Human Infections, Camel Reservoir",
+              "Arabian Peninsula, Africa, Enzootic"
+            ],
+            "mean_probe_similarity": 0.4899398386478424,
+            "retrieved_doc_ids": [
+              "matches",
+              "namespace",
+              "usage"
+            ],
+            "ranked_docs_sent": [
+              {
+                "id": "1170_covidqa_1_0",
+                "retrieval_score": 0.794077635,
+                "final_weight": 3.4899398386478424,
+                "citation_count": 5,
+                "redundancy_penalty": 0.0,
+                "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, …"
+              }
+            ],
+            "stages": {
+              "probe": {
+                "duration_s": 1.828824299853295,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "reweigh": {
+                "duration_s": 0.17348650004714727,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "prompt_build": {
+                "duration_s": 9.799841791391373e-06,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "generate": {
+                "duration_s": 1.950003206729889e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              }
+            },
+            "llm": {
+              "engine": {
+                "backend": "nano-vllm",
+                "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+              },
+              "usage": {},
+              "timing": {
+                "ttft_ms": null,
+                "gen_ms": null
+              },
+              "cost_usd": null,
+              "output_text": null,
+              "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+            },
+            "router_logs": {
+              "policy": null,
+              "decision": null,
+              "notes": null
+            }
+          }
+        ]
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "1668",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What was the result  of the Imperial College estimation?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.0500272512435913e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "Global, Financial, Crisis",
+          "Youth, Wellbeing, Australia",
+          "Coronavirus, Transmission, Wuhan",
+          "Imperial, College, London",
+          "Estimation, 4000, Cases"
+        ],
+        "mean_probe_similarity": 0.31012892723083496,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1332_covidqa_1_0",
+            "retrieval_score": 0.596496,
+            "final_weight": 2.9193385243415833,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7815808057785034,
+            "text_preview": "title : the extent of transmission of novel coronavirus in wuhan, china, 2020 passage : our latest estimate is comparable to a preliminary report posted by a research group at imperial college london …"
+          },
+          {
+            "id": "536_covidqa_0_0",
+            "retrieval_score": 0.611797512,
+            "final_weight": 2.8549144864082336,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9104288816452026,
+            "text_preview": "title : what effect did the global financial crisis have upon youth wellbeing? evidence from four australian cohorts passage : states and the united kingdom, let alone greece, italy, ireland, and spai…"
+          },
+          {
+            "id": "536_covidqa_2_0",
+            "retrieval_score": 0.598175645,
+            "final_weight": 2.8549144864082336,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9104288816452026,
+            "text_preview": "title : what effect did the global financial crisis have upon youth wellbeing? evidence from four australian cohorts passage : the close - up graphs provide strong evidence for the negative impact of …"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 2.2786368997767568,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.35228030011057854,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 1.9599683582782745e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 3.3400021493434906e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": true,
+        "parts": [
+          {
+            "sub_question": "What was the result  of the Imperial College estimation?",
+            "prompt_template_id": "qa_json_v2",
+            "retriever_settings": {
+              "top_k": 5,
+              "n_probes": 5,
+              "filters": {
+                "config": {
+                  "$in": [
+                    "covidqa"
+                  ]
+                }
+              }
+            },
+            "probes": [
+              "Global, Financial, Crisis",
+              "Youth, Wellbeing, Australia",
+              "Coronavirus, Transmission, Wuhan",
+              "Imperial, College, London",
+              "4000, Cases, Estimate"
+            ],
+            "mean_probe_similarity": 0.30871206521987915,
+            "retrieved_doc_ids": [
+              "matches",
+              "namespace",
+              "usage"
+            ],
+            "ranked_docs_sent": [
+              {
+                "id": "1332_covidqa_1_0",
+                "retrieval_score": 0.596496,
+                "final_weight": 2.9179216623306274,
+                "citation_count": 5,
+                "redundancy_penalty": 0.7815808057785034,
+                "text_preview": "title : the extent of transmission of novel coronavirus in wuhan, china, 2020 passage : our latest estimate is comparable to a preliminary report posted by a research group at imperial college london …"
+              },
+              {
+                "id": "536_covidqa_0_0",
+                "retrieval_score": 0.611797512,
+                "final_weight": 2.853497624397278,
+                "citation_count": 5,
+                "redundancy_penalty": 0.9104288816452026,
+                "text_preview": "title : what effect did the global financial crisis have upon youth wellbeing? evidence from four australian cohorts passage : states and the united kingdom, let alone greece, italy, ireland, and spai…"
+              },
+              {
+                "id": "536_covidqa_2_0",
+                "retrieval_score": 0.598175645,
+                "final_weight": 2.853497624397278,
+                "citation_count": 5,
+                "redundancy_penalty": 0.9104288816452026,
+                "text_preview": "title : what effect did the global financial crisis have upon youth wellbeing? evidence from four australian cohorts passage : the close - up graphs provide strong evidence for the negative impact of …"
+              }
+            ],
+            "stages": {
+              "probe": {
+                "duration_s": 2.4421281996183097,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "reweigh": {
+                "duration_s": 0.3487243000417948,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "prompt_build": {
+                "duration_s": 1.769978553056717e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "generate": {
+                "duration_s": 2.7600210160017014e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              }
+            },
+            "llm": {
+              "engine": {
+                "backend": "nano-vllm",
+                "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+              },
+              "usage": {},
+              "timing": {
+                "ttft_ms": null,
+                "gen_ms": null
+              },
+              "cost_usd": null,
+              "output_text": null,
+              "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+            },
+            "router_logs": {
+              "policy": null,
+              "decision": null,
+              "notes": null
+            }
+          }
+        ]
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "1177",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What is the death rate from MERS-COV?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.7399975806474686e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "MERS-CoV, mortality rate, 35%",
+          "MERS-CoV, KSA cases, 42%",
+          "MERS-CoV, South Korea cases, 19%",
+          "MERS-CoV, age group, mortality",
+          "MERS-CoV, infection rate, death rate"
+        ],
+        "mean_probe_similarity": 0.7126632332801819,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1194_covidqa_1_0",
+            "retrieval_score": 0.795220613,
+            "final_weight": 3.2965185940265656,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8322892785072327,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : or worse, and secondary bacterial infections have been reported. disease can progress to acute respiratory distress synd…"
+          },
+          {
+            "id": "1682_covidqa_2_0",
+            "retrieval_score": 0.779771268,
+            "final_weight": 3.2965185940265656,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8322892785072327,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the 2 - 3 % prevalence of active mers - cov infections is not dissimilar to the hospital - based prevalence of other hum…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 2.108291099779308,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.3076416002586484,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 1.879967749118805e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 3.390014171600342e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": false,
+        "parts": null
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "89",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What was the last step in the analysis?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.479972317814827e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "Scale, items, eliminated",
+          "Study, cross-sectional, limitations",
+          "Analysis, discrimination, index",
+          "Items, improvement, eliminated",
+          "Study, longitudinal, causality"
+        ],
+        "mean_probe_similarity": 0.44996175169944763,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1266_covidqa_0_0",
+            "retrieval_score": 0.623776317,
+            "final_weight": 3.0443122684955597,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8112989664077759,
+            "text_preview": "title : assessment of temporary community - based health care facilities during arbaeenia mass gathering at karbala, iraq : cross - sectional survey study passage : any new systems should be in place …"
+          },
+          {
+            "id": "123_covidqa_3_0",
+            "retrieval_score": 0.611349702,
+            "final_weight": 2.9995884597301483,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9007465839385986,
+            "text_preview": "title : suffering a loss is good fortune : myth or reality? passage : there were four potential limitations to our study. first, we only conducted a cross - sectional study in study 3, whereas it woul…"
+          },
+          {
+            "id": "779_covidqa_1_0",
+            "retrieval_score": 0.60707438,
+            "final_weight": 2.9995884597301483,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9007465839385986,
+            "text_preview": "title : suffering a loss is good fortune : myth or reality? passage : in the assessment of item discrimination, the discrimination index was computed by subtracting the mean score of participants in t…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 3.4985635997727513,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.38350140023976564,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 2.219993621110916e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 2.9399991035461426e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": true,
+        "parts": [
+          {
+            "sub_question": "What was the last step in the analysis?",
+            "prompt_template_id": "qa_json_v2",
+            "retriever_settings": {
+              "top_k": 5,
+              "n_probes": 5,
+              "filters": {
+                "config": {
+                  "$in": [
+                    "covidqa"
+                  ]
+                }
+              }
+            },
+            "probes": [
+              "Eliminating, items, scale",
+              "Reducing, items, number",
+              "Improving, items, discrimination",
+              "Assessment, item, discrimination",
+              "Study, cross-sectional, limitations"
+            ],
+            "mean_probe_similarity": 0.5481973886489868,
+            "retrieved_doc_ids": [
+              "matches",
+              "namespace",
+              "usage"
+            ],
+            "ranked_docs_sent": [
+              {
+                "id": "1266_covidqa_0_0",
+                "retrieval_score": 0.623776317,
+                "final_weight": 3.142547905445099,
+                "citation_count": 5,
+                "redundancy_penalty": 0.8112989664077759,
+                "text_preview": "title : assessment of temporary community - based health care facilities during arbaeenia mass gathering at karbala, iraq : cross - sectional survey study passage : any new systems should be in place …"
+              },
+              {
+                "id": "123_covidqa_3_0",
+                "retrieval_score": 0.611349702,
+                "final_weight": 3.0978240966796875,
+                "citation_count": 5,
+                "redundancy_penalty": 0.9007465839385986,
+                "text_preview": "title : suffering a loss is good fortune : myth or reality? passage : there were four potential limitations to our study. first, we only conducted a cross - sectional study in study 3, whereas it woul…"
+              },
+              {
+                "id": "779_covidqa_1_0",
+                "retrieval_score": 0.60707438,
+                "final_weight": 3.0978240966796875,
+                "citation_count": 5,
+                "redundancy_penalty": 0.9007465839385986,
+                "text_preview": "title : suffering a loss is good fortune : myth or reality? passage : in the assessment of item discrimination, the discrimination index was computed by subtracting the mean score of participants in t…"
+              }
+            ],
+            "stages": {
+              "probe": {
+                "duration_s": 2.093224700074643,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "reweigh": {
+                "duration_s": 0.34808170003816485,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "prompt_build": {
+                "duration_s": 2.0700041204690933e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "generate": {
+                "duration_s": 3.1299889087677e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              }
+            },
+            "llm": {
+              "engine": {
+                "backend": "nano-vllm",
+                "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+              },
+              "usage": {},
+              "timing": {
+                "ttft_ms": null,
+                "gen_ms": null
+              },
+              "cost_usd": null,
+              "output_text": null,
+              "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+            },
+            "router_logs": {
+              "policy": null,
+              "decision": null,
+              "notes": null
+            }
+          }
+        ]
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "555",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "Why is it proposed that some bat SL-CoVs may be able to directly infect human hosts?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.5200191885232925e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "human, ace2, SARS-CoV",
+          "bat, SL-CoV, infection",
+          "intermediate, host, unnecessary",
+          "human, airway, cells",
+          "SL-shc014, virus, replication"
+        ],
+        "mean_probe_similarity": 0.37404942512512207,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "550_covidqa_3_0",
+            "retrieval_score": 0.777350426,
+            "final_weight": 2.965743839740753,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8166111707687378,
+            "text_preview": "title : no credible evidence supporting claims of the laboratory engineering of sars - cov - 2 passage : same contact sites as the human ace2 gene for interacting with sars cov, it was proposed that a…"
+          },
+          {
+            "id": "143_covidqa_0_0",
+            "retrieval_score": 0.746699572,
+            "final_weight": 2.947731703519821,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8526354432106018,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the possibility that bats were an animal host of mers - cov was initially widely discussed because of the existing diver…"
+          },
+          {
+            "id": "1120_covidqa_2_0",
+            "retrieval_score": 0.736925125,
+            "final_weight": 2.9345659017562866,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8789670467376709,
+            "text_preview": "title : accelerated viral dynamics in bat cell lines, with implications for zoonotic emergence passage : the findings may help to explain why bats are often the source for viruses that are deadly in h…"
+          },
+          {
+            "id": "1125_covidqa_1_0",
+            "retrieval_score": 0.733856559,
+            "final_weight": 2.9345659017562866,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8789670467376709,
+            "text_preview": "title : accelerated viral dynamics in bat cell lines, with implications for zoonotic emergence passage : countered by the virus spreading more quickly from cell to cell. this suggests that bat immune …"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 2.0308623001910746,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.44831290002912283,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 1.729978248476982e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 2.6700086891651154e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": true,
+        "parts": [
+          {
+            "sub_question": "Why is it proposed that some bat SL-CoVs may be able to directly infect human hosts?",
+            "prompt_template_id": "qa_json_v2",
+            "retriever_settings": {
+              "top_k": 5,
+              "n_probes": 5,
+              "filters": {
+                "config": {
+                  "$in": [
+                    "covidqa"
+                  ]
+                }
+              }
+            },
+            "probes": [
+              "human, ace2, SARS-CoV",
+              "bat, SL-CoV, infection",
+              "intermediate, host, unnecessary",
+              "human, airway, cells",
+              "SL-SHC014, chimeric, virus"
+            ],
+            "mean_probe_similarity": 0.3784542679786682,
+            "retrieved_doc_ids": [
+              "matches",
+              "namespace",
+              "usage"
+            ],
+            "ranked_docs_sent": [
+              {
+                "id": "550_covidqa_3_0",
+                "retrieval_score": 0.777350426,
+                "final_weight": 2.9701486825942993,
+                "citation_count": 5,
+                "redundancy_penalty": 0.8166111707687378,
+                "text_preview": "title : no credible evidence supporting claims of the laboratory engineering of sars - cov - 2 passage : same contact sites as the human ace2 gene for interacting with sars cov, it was proposed that a…"
+              },
+              {
+                "id": "143_covidqa_0_0",
+                "retrieval_score": 0.746699572,
+                "final_weight": 2.9521365463733673,
+                "citation_count": 5,
+                "redundancy_penalty": 0.8526354432106018,
+                "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the possibility that bats were an animal host of mers - cov was initially widely discussed because of the existing diver…"
+              },
+              {
+                "id": "1120_covidqa_2_0",
+                "retrieval_score": 0.736925125,
+                "final_weight": 2.9389707446098328,
+                "citation_count": 5,
+                "redundancy_penalty": 0.8789670467376709,
+                "text_preview": "title : accelerated viral dynamics in bat cell lines, with implications for zoonotic emergence passage : the findings may help to explain why bats are often the source for viruses that are deadly in h…"
+              },
+              {
+                "id": "1125_covidqa_1_0",
+                "retrieval_score": 0.733856559,
+                "final_weight": 2.9389707446098328,
+                "citation_count": 5,
+                "redundancy_penalty": 0.8789670467376709,
+                "text_preview": "title : accelerated viral dynamics in bat cell lines, with implications for zoonotic emergence passage : countered by the virus spreading more quickly from cell to cell. this suggests that bat immune …"
+              }
+            ],
+            "stages": {
+              "probe": {
+                "duration_s": 2.1391441002488136,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "reweigh": {
+                "duration_s": 0.6516192997805774,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "prompt_build": {
+                "duration_s": 2.110004425048828e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "generate": {
+                "duration_s": 3.1299889087677e-05,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              }
+            },
+            "llm": {
+              "engine": {
+                "backend": "nano-vllm",
+                "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+              },
+              "usage": {},
+              "timing": {
+                "ttft_ms": null,
+                "gen_ms": null
+              },
+              "cost_usd": null,
+              "output_text": null,
+              "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+            },
+            "router_logs": {
+              "policy": null,
+              "decision": null,
+              "notes": null
+            }
+          }
+        ]
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "538",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What hypotheses can explain this result?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.8499867767095566e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "r0, malaria, models",
+          "virus, discovery, model",
+          "cancer, biomarker, entropy",
+          "reassortment, phylogeography, viruses",
+          "experimental, bias, outliers"
+        ],
+        "mean_probe_similarity": 0.4655255675315857,
+        "retrieved_doc_ids": [
+          "matches",
+          "namespace",
+          "usage"
+        ],
+        "retrieved_doc_scores": [
+          null,
+          null,
+          null
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "728_covidqa_3_0",
+            "retrieval_score": 0.664019048,
+            "final_weight": 3.0972408950328827,
+            "citation_count": 5,
+            "redundancy_penalty": 0.736569344997406,
+            "text_preview": "title : cancer biomarker discovery : the entropic hallmark passage : this raised a suspicion about the true nature of this phenomenon. if the labelling is correct, this may indicate a subsampled group…"
+          },
+          {
+            "id": "1314_covidqa_0_0",
+            "retrieval_score": 0.673060834,
+            "final_weight": 3.0630615055561066,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8049281239509583,
+            "text_preview": "title : the failure of r ( 0 ) passage : in this paper, we outline the problems with r 0 and examine a number of alternatives that have been proposed. we include a worked example of malaria to demonst…"
+          },
+          {
+            "id": "1622_covidqa_2_0",
+            "retrieval_score": 0.670499206,
+            "final_weight": 3.0569446980953217,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8171617388725281,
+            "text_preview": "title : temporal trends in the discovery of human viruses passage : we confirmed that our model reproduced the observed slight downward trend in the rate of discovery since 1954 and the observed varia…"
+          },
+          {
+            "id": "826_covidqa_1_0",
+            "retrieval_score": 0.661371648,
+            "final_weight": 3.0569446980953217,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8171617388725281,
+            "text_preview": "title : bayesian phylogeography finds its roots passage : we further annotated the tree nodes with their most probable in combination with other topological differences between the trees, this differe…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 1.851450000423938,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.38754160003736615,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "prompt_build": {
+            "duration_s": 1.910002902150154e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 3.0199997127056122e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": true,
+        "parts": [
+          {
+            "sub_question": "What hypotheses can explain this result?",
+            "prompt_template_id": "qa_json_v2",
+            "retriever_settings": {
+              "top_k": 5,
+              "n_probes": 5,
+              "filters": {
+                "config": {
+                  "$in": [
+                    "covidqa"
+                  ]
+                }
+              }
+            },
+            "probes": null,
+            "mean_probe_similarity": null,
+            "retrieved_doc_ids": [],
+            "ranked_docs_sent": [],
+            "stages": {
+              "probe": {
+                "duration_s": 67.5264388998039,
+                "gpu_energy_j": null,
+                "cpu_energy_j": null
+              },
+              "reweigh": null,
+              "prompt_build": null,
+              "generate": null
+            },
+            "llm": {
+              "engine": {
+                "backend": "nano-vllm",
+                "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+              },
+              "usage": {},
+              "timing": {
+                "ttft_ms": null,
+                "gen_ms": null
+              },
+              "cost_usd": null,
+              "output_text": null,
+              "error": "RuntimeError: Gemini rate limit/quota reached repeatedly."
+            },
+            "router_logs": {
+              "policy": null,
+              "decision": null,
+              "notes": null
+            },
+            "error": "RuntimeError: Gemini rate limit/quota reached repeatedly."
+          }
+        ]
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    },
+    {
+      "qid": "758",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What is one reason for the lack of success of immunization phage displayed peptides with native protein?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.950010821223259e-05,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: nano-vLLM not installed. pip install git+https://github.com/GeeeekExplorer/nano-vllm.git"
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": null,
+        "mean_probe_similarity": null,
+        "retrieved_doc_ids": [],
+        "retrieved_doc_scores": [],
+        "ranked_docs_sent": [],
+        "stages": {
+          "probe": {
+            "duration_s": 67.66120850015432,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": null,
+          "prompt_build": null,
+          "generate": null
+        },
+        "llm": {
+          "engine": {
+            "backend": "nano-vllm",
+            "model_path": "C:\\Users\\Owner\\.cache\\huggingface\\hub\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca"
+          },
+          "usage": {},
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": null
+          },
+          "cost_usd": null,
+          "output_text": null,
+          "error": "RuntimeError: Gemini rate limit/quota reached repeatedly."
+        },
+        "router_logs": {
+          "policy": null,
+          "decision": null,
+          "notes": null
+        },
+        "decomposed": false,
+        "parts": null,
+        "error": "RuntimeError: Gemini rate limit/quota reached repeatedly."
+      },
+      "quality_labels": {
+        "faithfulness": null,
+        "conciseness": null,
+        "format_compliance": null
+      },
+      "task_accuracy": {
+        "exact_match": null,
+        "f1": null
+      },
+      "router_decision": null,
+      "router_logs": {
+        "policy": null,
+        "decision": null,
+        "notes": null
+      },
+      "system_health": {
+        "gpu_mem": null
+      }
+    }
+  ],
+  "derived_metrics_note": "Throughput/efficiency stats (tokens/s, J/token, $/answer, etc.) can be derived offline from the recorded token usage, energy, and durations.",
+  "time_saved_at": "2025-08-27 14:56:01"
+}

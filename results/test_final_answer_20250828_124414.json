@@ -1,0 +1,26 @@
+{
+  "question": "Where did the first known cases of MERS occur?",
+  "probes": [
+    "first, known, cases",
+    "occur, mers, coronavirus",
+    "respiratory, reported, cov",
+    "retrospectively., epidemiology, transmission",
+    "diagnostics, infections., associated"
+  ],
+  "top_ids": [
+    "1244_covidqa_1_0",
+    "1243_covidqa_0_0",
+    "679_covidqa_2_0",
+    "1236_covidqa_2_0",
+    "1159_covidqa_3_0"
+  ],
+  "answer": {
+    "answer": "The first known cases of MERS occurred in 2012 in Jordan, reported retrospectively.",
+    "citations": [
+      "1236_covidqa_2_0",
+      "1243_covidqa_0_0",
+      "1244_covidqa_1_0",
+      "1159_covidqa_3_0"
+    ]
+  }
+}

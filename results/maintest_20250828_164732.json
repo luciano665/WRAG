@@ -1,0 +1,2966 @@
+{
+  "run_metadata": {
+    "dataset": {
+      "subset": "covidqa",
+      "split": "validation",
+      "limit": 10
+    },
+    "hardware": {
+      "cpu": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+      "ram_gb": 15.24,
+      "storage_fs_type": "NTFS"
+    },
+    "software": {
+      "python": "3.12.5",
+      "os": "Windows 11",
+      "datasets": "4.0.0",
+      "psutil": "7.0.0",
+      "pynvml": null,
+      "commit_sha": "10999b0"
+    },
+    "models": {
+      "backend": "openrouter",
+      "or_model": "deepseek/deepseek-r1-distill-llama-8b",
+      "pricing_input_per_1k": null,
+      "pricing_output_per_1k": null,
+      "sampler_defaults": {
+        "temperature": 0.2,
+        "max_tokens": 512
+      }
+    },
+    "retrieval_config": {
+      "embedder": null,
+      "index_name": "wrag-v3",
+      "namespace": "ragbench",
+      "chunking": null,
+      "reranker": null,
+      "wrag_hyperparams": {
+        "alpha": 1.0,
+        "beta": 0.6,
+        "gamma": 0.5,
+        "citation_top_n": null,
+        "citation_sim_threshold": 0.35,
+        "top_k": 5,
+        "n_probes": 5,
+        "top_m": 5
+      },
+      "router_policy": null
+    },
+    "env_missing": []
+  },
+  "queries": [
+    {
+      "qid": "1033",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "Where was alpha-tubulin found least abundantly in the cell?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.215568699999494,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 2215.3717999990477
+            }
+          },
+          "usage": {
+            "prompt_tokens": 149,
+            "completion_tokens": 63,
+            "total_tokens": 212,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 2215.3717999990477
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "cytoplasm",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "cytoplasm",
+          "citations": [],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "alpha-tubulin, abundantly, found",
+          "least, cell, microtubules",
+          "transport, egress, virus",
+          "entry, cells, ends",
+          "computational, intracellular, cytoskeleton"
+        ],
+        "mean_probe_similarity": 0.39640191197395325,
+        "probe_similarity_diversity": {
+          "min": 0.24162551760673523,
+          "mean": 0.3964019328355789,
+          "max": 0.5618364214897156
+        },
+        "retrieved_doc_ids": [
+          "1032_covidqa_2_0",
+          "1032_covidqa_0_0",
+          "1032_covidqa_3_0",
+          "914_covidqa_0_0",
+          "600_covidqa_1_0"
+        ],
+        "retrieved_doc_scores": [
+          0.709556401,
+          0.688875496,
+          0.674411356,
+          0.652543843,
+          0.652350366
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1032_covidqa_2_0",
+            "retrieval_score": 0.709556401,
+            "final_weight": 3.020413637161255,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7519765496253967,
+            "text_preview": "title : imaging, tracking and computational analyses of virus entry and egress with the cytoskeleton passage : microtubules are polarized filaments formed by tubulins and microtubule - associated prot…"
+          },
+          {
+            "id": "1032_covidqa_3_0",
+            "retrieval_score": 0.674411356,
+            "final_weight": 3.013240396976471,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7663230299949646,
+            "text_preview": "title : quantitative phosphoproteomics of proteasome inhibition in multiple myeloma cells passage : to investigate whether these bortezomib - induced changes in the tubulin polymerization were mediate…"
+          },
+          {
+            "id": "914_covidqa_0_0",
+            "retrieval_score": 0.652543843,
+            "final_weight": 3.013240396976471,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7663230299949646,
+            "text_preview": "title : proteomics : challenges, techniques and possibilities to overcome biological sample complexity passage : transduction, cell differentiation, and development to cell cycle control and metabolis…"
+          },
+          {
+            "id": "1032_covidqa_0_0",
+            "retrieval_score": 0.688875496,
+            "final_weight": 2.987441450357437,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8179209232330322,
+            "text_preview": "title : nucleolar protein trafficking in response to hiv - 1 tat : rewiring the nucleolus passage : in the mixed nucleolar fraction. of note, nucleolin was equally distributed between the nuclear and …"
+          },
+          {
+            "id": "600_covidqa_1_0",
+            "retrieval_score": 0.652350366,
+            "final_weight": 2.987441450357437,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8179209232330322,
+            "text_preview": "title : heterogeneous nuclear ribonucleoprotein a1 regulates rna synthesis of a cytoplasmic virus passage : of differences were observed for the n protein in these three cell lines. actin levels in di…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 12.801177899998947,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.44595230000049924,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 4.276548100000582,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 4276.456600000529
+            }
+          },
+          "usage": {
+            "prompt_tokens": 1174,
+            "completion_tokens": 168,
+            "total_tokens": 1342,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 4276.456600000529
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "cytoplasm",
+            "answer_type": "span",
+            "citations": [
+              "1032_covidqa_0_0",
+              "1032_covidqa_2_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "1032_covidqa_0_0",
+                "snippet": "alpha - tubulin was highly abundant in the cytoplasmic fraction and weakly detected in the nuclear fractions."
+              },
+              {
+                "doc_id": "1032_covidqa_2_0",
+                "snippet": "microtubules are composed of different isotypes of alpha and beta tubulin, which"
+              }
+            ],
+            "confidence": 0.85,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "cytoplasm",
+          "citations": [
+            "1032_covidqa_0_0",
+            "1032_covidqa_2_0"
+          ],
+          "confidence": 0.85,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              -2,
+              0
+            ],
+            "top1_margin": 0.0071732401847839355,
+            "spearman_retrieval_vs_weight": 0.5270462766947299,
+            "kendall_retrieval_vs_weight": 0.5
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.08235294117647059,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.24162551760673523,
+              "mean": 0.3964019328355789,
+              "max": 0.5618364214897156
+            },
+            "hit_rate": 0.8
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "1273",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What does the semicontaminated area include?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 3.163296700000501,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 3163.2496000001993
+            }
+          },
+          "usage": {
+            "prompt_tokens": 145,
+            "completion_tokens": 104,
+            "total_tokens": 249,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 3163.2496000001993
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "A semicontaminated area is a region where some contamination has occurred but not enough to classify it as fully contaminated. This area may require further investigation or cleanup efforts to determine the extent of the contamination and ensure public safety.",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "A semicontaminated area is a region where some contamination has occurred but not enough to classify it as fully contaminated. This area may require further investigation or cleanup efforts to determine the extent of the contamination and ensure public safety.",
+          "citations": [],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "semicontaminated, include, area",
+          "study, expected, handlers",
+          "animal, vary, unanticipated.",
+          "contamination, statistically, alternatively",
+          "differences., environment., proportions"
+        ],
+        "mean_probe_similarity": 0.3881998062133789,
+        "probe_similarity_diversity": {
+          "min": 0.25222575664520264,
+          "mean": 0.38819977939128875,
+          "max": 0.5050025582313538
+        },
+        "retrieved_doc_ids": [
+          "124_covidqa_0_0",
+          "1275_covidqa_1_0",
+          "394_covidqa_1_0",
+          "260_covidqa_1_0",
+          "394_covidqa_3_0"
+        ],
+        "retrieved_doc_scores": [
+          0.655786395,
+          0.639060497,
+          0.633741379,
+          0.633390307,
+          0.630902112
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "260_covidqa_1_0",
+            "retrieval_score": 0.633390307,
+            "final_weight": 2.9943330585956573,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7877334952354431,
+            "text_preview": "title : outdoor environments and human pathogens in air passage : at the first two meetings, participants were given a topic and asked to prepare a one - page literature review to support their presen…"
+          },
+          {
+            "id": "1275_covidqa_1_0",
+            "retrieval_score": 0.639060497,
+            "final_weight": 2.9806900024414062,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8150196075439453,
+            "text_preview": "title : contamination during doffing of personal protective equipment by healthcare providers passage : a demographic survey was performed with all participants. the survey also included questions on …"
+          },
+          {
+            "id": "124_covidqa_0_0",
+            "retrieval_score": 0.655786395,
+            "final_weight": 2.975947082042694,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8245054483413696,
+            "text_preview": "title : the trojan chicken study, minnesota passage : some of our study findings were unanticipated. we expected contamination proportions to vary by age, gender, and role because we expected these fa…"
+          },
+          {
+            "id": "394_covidqa_1_0",
+            "retrieval_score": 0.633741379,
+            "final_weight": 2.9220848083496094,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9322299957275391,
+            "text_preview": "title : anthropogenic factors and the risk of highly pathogenic avian influenza h5n1 : prospects from a spatial - based model passage : litter, and poultry manure were transported along collection cir…"
+          },
+          {
+            "id": "394_covidqa_3_0",
+            "retrieval_score": 0.630902112,
+            "final_weight": 2.9220848083496094,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9322299957275391,
+            "text_preview": "title : anthropogenic factors and the risk of highly pathogenic avian influenza h5n1 : prospects from a spatial - based model passage : subdistricts with a low average altitude were associated with a …"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.972976099999869,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.29825089999940246,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 4.51467440000124,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 4514.614900001106
+            }
+          },
+          "usage": {
+            "prompt_tokens": 1047,
+            "completion_tokens": 168,
+            "total_tokens": 1215,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 4514.614900001106
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "semicontaminated areas include areas where contamination is moderate and requires additional cleaning to ensure safety.",
+            "answer_type": "span",
+            "citations": [
+              "394_covidqa_3_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "394_covidqa_3_0",
+                "snippet": "subdistricts with a low average altitude were associated with a high risk of hpai. the mixture of wetlands, ponds, irrigation networks and agriculture in these areas combined with intensive land use, may have constituted a favourable environment for the hpai h5n1 virus."
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "semicontaminated areas include areas where contamination is moderate and requires additional cleaning to ensure safety.",
+          "citations": [
+            "394_covidqa_3_0"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              0
+            ],
+            "top1_margin": 0.013643056154251099,
+            "spearman_retrieval_vs_weight": 0.20519567041703082,
+            "kendall_retrieval_vs_weight": 0.1111111111111111
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.11636363636363636,
+            "token_f1_max": 0.07692307692307693
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.25222575664520264,
+              "mean": 0.38819977939128875,
+              "max": 0.5050025582313538
+            },
+            "hit_rate": 0.6
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "1667",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "As of 26 January 2020, what countries had sporadic cases?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.1178624000003765,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 2117.8277999988495
+            }
+          },
+          "usage": {
+            "prompt_tokens": 151,
+            "completion_tokens": 62,
+            "total_tokens": 213,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 2117.8277999988495
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "United States",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.85,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "United States",
+          "citations": [],
+          "confidence": 0.85,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "countries, sporadic, january",
+          "cases, coronavirus, european",
+          "february, disease, passage",
+          "region, title, first",
+          "covid, mild., acquired"
+        ],
+        "mean_probe_similarity": 0.3730657994747162,
+        "probe_similarity_diversity": {
+          "min": 0.23064292967319489,
+          "mean": 0.37306578308343885,
+          "max": 0.491720974445343
+        },
+        "retrieved_doc_ids": [
+          "1323_covidqa_1_0",
+          "1573_covidqa_1_0",
+          "1538_covidqa_2_0",
+          "1713_covidqa_3_0",
+          "1666_covidqa_0_0"
+        ],
+        "retrieved_doc_scores": [
+          0.738310039,
+          0.729008,
+          0.719544828,
+          0.718260467,
+          0.718156219
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1573_covidqa_1_0",
+            "retrieval_score": 0.729008,
+            "final_weight": 2.9003966152668,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9453383684158325,
+            "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : in our analysis of early cases, we observed transmission in two broa…"
+          },
+          {
+            "id": "1323_covidqa_1_0",
+            "retrieval_score": 0.738310039,
+            "final_weight": 2.8910265266895294,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9640785455703735,
+            "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : have been mild."
+          },
+          {
+            "id": "1666_covidqa_0_0",
+            "retrieval_score": 0.718156219,
+            "final_weight": 2.8910265266895294,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9640785455703735,
+            "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : provided input to the outline, multiple versions of the manuscript a…"
+          },
+          {
+            "id": "1538_covidqa_2_0",
+            "retrieval_score": 0.719544828,
+            "final_weight": 2.8871783316135406,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9717749357223511,
+            "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : as at 09 : 00 on 21 february, few covid - 19 cases had been detected…"
+          },
+          {
+            "id": "1713_covidqa_3_0",
+            "retrieval_score": 0.718260467,
+            "final_weight": 2.8871783316135406,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9717749357223511,
+            "text_preview": "title : first cases of coronavirus disease 2019 ( covid - 19 ) in the who european region, 24 january to 21 february 2020 passage : abstract : in the who european region, covid - 19 surveillance was i…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.341350500000772,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.3042509000006248,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 5.27775279999878,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 5277.685700000802
+            }
+          },
+          "usage": {
+            "prompt_tokens": 916,
+            "completion_tokens": 204,
+            "total_tokens": 1120,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 5277.685700000802
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "China, France, Germany, Italy, and Spain",
+            "answer_type": "list",
+            "citations": [
+              "1323_covidqa_1_0",
+              "1538_covidqa_2_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "1323_covidqa_1_0",
+                "snippet": "have been mild."
+              },
+              {
+                "doc_id": "1538_covidqa_2_0",
+                "snippet": "as at 09 : 00 on 21 february, few covid - 19 cases had been detected in europe compared with asia. however the situation is rapidly developing, with a large outbreak recently identified in northern italy, with transmission in several municipalities and at least two deaths."
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "China, France, Germany, Italy, and Spain",
+          "citations": [
+            "1323_covidqa_1_0",
+            "1538_covidqa_2_0"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              -1,
+              -1
+            ],
+            "top1_margin": 0.009370088577270508,
+            "spearman_retrieval_vs_weight": 0.3689323936863109,
+            "kendall_retrieval_vs_weight": 0.25
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.04065040650406504,
+            "token_f1_max": 0.08333333333333333
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.23064292967319489,
+              "mean": 0.37306578308343885,
+              "max": 0.491720974445343
+            },
+            "hit_rate": 1.0
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "1160",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "Where did the first known cases of Middle East respiratory syndrome (MERS) occur?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.5786387999996805,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 2578.5971999994217
+            }
+          },
+          "usage": {
+            "prompt_tokens": 152,
+            "completion_tokens": 62,
+            "total_tokens": 214,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 2578.5971999994217
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "Saudi Arabia",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.85,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "Saudi Arabia",
+          "citations": [],
+          "confidence": 0.85,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "respiratory, syndrome, middle",
+          "first, known, cases",
+          "occur, east, mers",
+          "coronavirus, reported, cov",
+          "retrospectively., epidemiology, transmission"
+        ],
+        "mean_probe_similarity": 0.36452269554138184,
+        "probe_similarity_diversity": {
+          "min": 0.29653114080429077,
+          "mean": 0.3645226746797562,
+          "max": 0.442943274974823
+        },
+        "retrieved_doc_ids": [
+          "141_covidqa_0_0",
+          "679_covidqa_2_0",
+          "1179_covidqa_3_0",
+          "141_covidqa_3_0",
+          "1159_covidqa_2_0"
+        ],
+        "retrieved_doc_scores": [
+          0.794077635,
+          0.780696452,
+          0.768541694,
+          0.766936302,
+          0.759690225
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "679_covidqa_2_0",
+            "retrieval_score": 0.780696452,
+            "final_weight": 2.949229896068573,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8305855989456177,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : in 2015 two large outbreaks occurred. south korea was the site of the first large scale outbreak outside the arabian pen…"
+          },
+          {
+            "id": "1179_covidqa_3_0",
+            "retrieval_score": 0.768541694,
+            "final_weight": 2.938231259584427,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8525828719139099,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the first known mers human - to - human transmission event was one characterized by acute lrt disease in a healthcare se…"
+          },
+          {
+            "id": "1159_covidqa_2_0",
+            "retrieval_score": 0.759690225,
+            "final_weight": 2.91658353805542,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8958783149719238,
+            "text_preview": "title : potential maternal and infant outcomes from ( wuhan ) coronavirus 2019 - ncov infecting pregnant women : lessons from sars, mers, and other human coronavirus infections passage : middle east r…"
+          },
+          {
+            "id": "141_covidqa_0_0",
+            "retrieval_score": 0.794077635,
+            "final_weight": 2.915602058172226,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8978412747383118,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, …"
+          },
+          {
+            "id": "141_covidqa_3_0",
+            "retrieval_score": 0.766936302,
+            "final_weight": 2.915602058172226,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8978412747383118,
+            "text_preview": "title : demographic variations of mers - cov infection among suspected and confirmed cases : an epidemiological analysis of laboratory - based data from riyadh regional laboratory passage : text : a r…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 6.0774619999992865,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.32454499999948894,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 5.339792299999317,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 5339.731000000029
+            }
+          },
+          "usage": {
+            "prompt_tokens": 1076,
+            "completion_tokens": 228,
+            "total_tokens": 1304,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 5339.731000000029
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "Saudi Arabia",
+            "answer_type": "span",
+            "citations": [
+              "141_covidqa_0_0",
+              "1159_covidqa_2_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "141_covidqa_0_0",
+                "snippet": "the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia."
+              },
+              {
+                "doc_id": "1159_covidqa_2_0",
+                "snippet": "middle east respiratory syndrome was first reported in september 2012 in saudi arabia, following isolation of mers - cov from a male patient who died months earlier from severe pneumonia and multiple organ failure."
+              }
+            ],
+            "confidence": 0.85,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "Saudi Arabia",
+          "citations": [
+            "141_covidqa_0_0",
+            "1159_covidqa_2_0"
+          ],
+          "confidence": 0.85,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              -3,
+              2
+            ],
+            "top1_margin": 0.010998636484146118,
+            "spearman_retrieval_vs_weight": 0.051298917604257706,
+            "kendall_retrieval_vs_weight": 0.1111111111111111
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.05434782608695652,
+            "token_f1_max": 0.11764705882352941
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.29653114080429077,
+              "mean": 0.3645226746797562,
+              "max": 0.442943274974823
+            },
+            "hit_rate": 1.0
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "1668",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What was the result  of the Imperial College estimation?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 3.8519549000011466,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 3851.9185000004654
+            }
+          },
+          "usage": {
+            "prompt_tokens": 146,
+            "completion_tokens": 94,
+            "total_tokens": 240,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 3851.9185000004654
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "The result of the Imperial College estimation was that the number of COVID-19 cases in the UK would be around 500,000 by the end of March 2020.",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "The result of the Imperial College estimation was that the number of COVID-19 cases in the UK would be around 500,000 by the end of March 2020.",
+          "citations": [],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "estimation, imperial, college",
+          "result, effect, above.",
+          "given, considerable., unemployment",
+          "particularly, considerably, importantly",
+          "unmoderated, experienced, australian"
+        ],
+        "mean_probe_similarity": 0.3596450686454773,
+        "probe_similarity_diversity": {
+          "min": 0.21241948008537292,
+          "mean": 0.35964508056640626,
+          "max": 0.46386632323265076
+        },
+        "retrieved_doc_ids": [
+          "536_covidqa_0_0",
+          "1501_covidqa_0_0",
+          "536_covidqa_2_0",
+          "1659_covidqa_0_0",
+          "1351_covidqa_3_0"
+        ],
+        "retrieved_doc_scores": [
+          0.611797512,
+          0.606591702,
+          0.598175645,
+          0.597707152,
+          0.596496
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1501_covidqa_0_0",
+            "retrieval_score": 0.606591702,
+            "final_weight": 2.9837909638881683,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7517082095146179,
+            "text_preview": "title : estimating the number of infections and the impact of non - passage : united kingdom 2. 7 %"
+          },
+          {
+            "id": "1659_covidqa_0_0",
+            "retrieval_score": 0.597707152,
+            "final_weight": 2.977101594209671,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7650869488716125,
+            "text_preview": "title : reporting errors in infectious disease outbreaks, with an application to pandemic influenza a / h1n1 passage : the results of the simulations are given in figure 1 and 2. consistent with our t…"
+          },
+          {
+            "id": "1351_covidqa_3_0",
+            "retrieval_score": 0.596496,
+            "final_weight": 2.9688546657562256,
+            "citation_count": 5,
+            "redundancy_penalty": 0.7815808057785034,
+            "text_preview": "title : the extent of transmission of novel coronavirus in wuhan, china, 2020 passage : our latest estimate is comparable to a preliminary report posted by a research group at imperial college london …"
+          },
+          {
+            "id": "536_covidqa_0_0",
+            "retrieval_score": 0.611797512,
+            "final_weight": 2.904430627822876,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9104288816452026,
+            "text_preview": "title : what effect did the global financial crisis have upon youth wellbeing? evidence from four australian cohorts passage : states and the united kingdom, let alone greece, italy, ireland, and spai…"
+          },
+          {
+            "id": "536_covidqa_2_0",
+            "retrieval_score": 0.598175645,
+            "final_weight": 2.904430627822876,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9104288816452026,
+            "text_preview": "title : what effect did the global financial crisis have upon youth wellbeing? evidence from four australian cohorts passage : the close - up graphs provide strong evidence for the negative impact of …"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.239843900000778,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.28304879999996047,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 4.082122499999969,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 4082.04939999996
+            }
+          },
+          "usage": {
+            "prompt_tokens": 900,
+            "completion_tokens": 154,
+            "total_tokens": 1054,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 4082.04939999996
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "2.7% or 2.7",
+            "answer_type": "number",
+            "citations": [
+              "1501_covidqa_0_0",
+              "1351_covidqa_3_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "1501_covidqa_0_0",
+                "snippet": "united kingdom 2.7%"
+              },
+              {
+                "doc_id": "1351_covidqa_3_0",
+                "snippet": "4000 cases"
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "2.7% or 2.7",
+          "citations": [
+            "1501_covidqa_0_0",
+            "1351_covidqa_3_0"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              1,
+              2
+            ],
+            "top1_margin": 0.0066893696784973145,
+            "spearman_retrieval_vs_weight": -0.20519567041703082,
+            "kendall_retrieval_vs_weight": -0.1111111111111111
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.09523809523809523,
+            "token_f1_max": 0.4444444444444445
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.21241948008537292,
+              "mean": 0.35964508056640626,
+              "max": 0.46386632323265076
+            },
+            "hit_rate": 1.0
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "1177",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What is the death rate from MERS-COV?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.5348814000008133,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 2534.8353999997926
+            }
+          },
+          "usage": {
+            "prompt_tokens": 146,
+            "completion_tokens": 77,
+            "total_tokens": 223,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 2534.8353999997926
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "The death rate from MERS-COV is approximately 3% to 10%.",
+            "answer_type": "number",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "The death rate from MERS-COV is approximately 3% to 10%.",
+          "citations": [],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "mers-cov, death, rate",
+          "cases, infections, reported.",
+          "mers, all, approximately",
+          "epidemiology, transmission, asymptomatic",
+          "coronavirus, diagnostics, respiratory"
+        ],
+        "mean_probe_similarity": 0.44928178191185,
+        "probe_similarity_diversity": {
+          "min": 0.3155757188796997,
+          "mean": 0.44928179681301117,
+          "max": 0.6259151697158813
+        },
+        "retrieved_doc_ids": [
+          "1195_covidqa_0_0",
+          "799_covidqa_3_0",
+          "1192_covidqa_1_0",
+          "1246_covidqa_2_0",
+          "1221_covidqa_0_0"
+        ],
+        "retrieved_doc_scores": [
+          0.795220613,
+          0.779771268,
+          0.777648,
+          0.774943829,
+          0.772937238
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "799_covidqa_3_0",
+            "retrieval_score": 0.779771268,
+            "final_weight": 3.024969667196274,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8486242294311523,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the 2 - 3 % prevalence of active mers - cov infections is not dissimilar to the hospital - based prevalence of other hum…"
+          },
+          {
+            "id": "1246_covidqa_2_0",
+            "retrieval_score": 0.774943829,
+            "final_weight": 3.0180456936359406,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8624721765518188,
+            "text_preview": "title : demographic variations of mers - cov infection among suspected and confirmed cases : an epidemiological analysis of laboratory - based data from riyadh regional laboratory passage : is is in a…"
+          },
+          {
+            "id": "1221_covidqa_0_0",
+            "retrieval_score": 0.772937238,
+            "final_weight": 3.002295881509781,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8939718008041382,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the proportion of fatal mers cases within the ksa compared to outside the ksa, as well as the age, and sex distribution …"
+          },
+          {
+            "id": "1195_covidqa_0_0",
+            "retrieval_score": 0.795220613,
+            "final_weight": 2.9968283772468567,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9049068093299866,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : or worse, and secondary bacterial infections have been reported. disease can progress to acute respiratory distress synd…"
+          },
+          {
+            "id": "1192_covidqa_1_0",
+            "retrieval_score": 0.777648,
+            "final_weight": 2.9968283772468567,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9049068093299866,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : but close and lengthy exposure appears to be a requirement. the ksa is the focal point of mers, with the majority of hum…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.763919799999712,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.295086000000083,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 5.58411260000139,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 5584.057700001722
+            }
+          },
+          "usage": {
+            "prompt_tokens": 1039,
+            "completion_tokens": 234,
+            "total_tokens": 1273,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 5584.057700001722
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "Approximately 35% of reported MERS-COV cases result in death.",
+            "answer_type": "number",
+            "citations": [
+              "1195",
+              "1221"
+            ],
+            "evidence": [
+              {
+                "doc_id": "1195",
+                "snippet": "mers has reportedly killed approximately 35 % of all reported cases, 42 % of cases in the ksa, yet only 19 % of cases in south korea, where mortality ranged from 7 % among younger age groups to 40 % among those aged 60 years and above ; all may be inflated values with asymptomatic or mild infections sometimes not sought or not reported."
+              },
+              {
+                "doc_id": "1221",
+                "snippet": "approximately 43 % of mers cases in the ksa were fatal between 2012 and december 2015 while 21 % died among those occurring outside of the ksa."
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "Approximately 35% of reported MERS-COV cases result in death.",
+          "citations": [
+            "1195",
+            "1221"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": 0.006923973560333252,
+            "spearman_retrieval_vs_weight": -0.20519567041703082,
+            "kendall_retrieval_vs_weight": -0.1111111111111111
+          },
+          "citations_valid": false,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.1891891891891892,
+            "token_f1_max": 0.30303030303030304
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.3155757188796997,
+              "mean": 0.44928179681301117,
+              "max": 0.6259151697158813
+            },
+            "hit_rate": 1.0
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "89",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What was the last step in the analysis?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.3684308000010788,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 2368.3850999987044
+            }
+          },
+          "usage": {
+            "prompt_tokens": 144,
+            "completion_tokens": 76,
+            "total_tokens": 220,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 2368.3850999987044
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "The last step in the analysis was the final review of the findings to ensure accuracy.",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.85,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "The last step in the analysis was the final review of the findings to ensure accuracy.",
+          "citations": [],
+          "confidence": 0.85,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "analysis, last, step",
+          "allow, mg, interpretation",
+          "effectiveness, establishing, surveillance",
+          "comfortable, assessment, facilities",
+          "sufficient, determined, collection"
+        ],
+        "mean_probe_similarity": 0.3940332233905792,
+        "probe_similarity_diversity": {
+          "min": 0.3215898275375366,
+          "mean": 0.39403321146965026,
+          "max": 0.47735080122947693
+        },
+        "retrieved_doc_ids": [
+          "1266_covidqa_0_0",
+          "514_covidqa_0_0",
+          "779_covidqa_1_0",
+          "312_covidqa_3_0",
+          "237_covidqa_3_0"
+        ],
+        "retrieved_doc_scores": [
+          0.623776317,
+          0.611349702,
+          0.60707438,
+          0.606848836,
+          0.605882704
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1266_covidqa_0_0",
+            "retrieval_score": 0.623776317,
+            "final_weight": 2.9747621715068817,
+            "citation_count": 5,
+            "redundancy_penalty": 0.838542103767395,
+            "text_preview": "title : assessment of temporary community - based health care facilities during arbaeenia mass gathering at karbala, iraq : cross - sectional survey study passage : any new systems should be in place …"
+          },
+          {
+            "id": "237_covidqa_3_0",
+            "retrieval_score": 0.605882704,
+            "final_weight": 2.9747621715068817,
+            "citation_count": 5,
+            "redundancy_penalty": 0.838542103767395,
+            "text_preview": "title : steps to a sustainable public health surveillance enterprise a commentary from the international society for disease surveillance passage : 1. recognize systematic and ongoing public health su…"
+          },
+          {
+            "id": "312_covidqa_3_0",
+            "retrieval_score": 0.606848836,
+            "final_weight": 2.9740428030490875,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8399808406829834,
+            "text_preview": "title : gain - of - function research : ethical analysis passage : some argued that publishing studies like these in full detail provided'' recipes'' for especially dangerous potential biological weap…"
+          },
+          {
+            "id": "514_covidqa_0_0",
+            "retrieval_score": 0.611349702,
+            "final_weight": 2.94365993142128,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9007465839385986,
+            "text_preview": "title : suffering a loss is good fortune : myth or reality? passage : there were four potential limitations to our study. first, we only conducted a cross - sectional study in study 3, whereas it woul…"
+          },
+          {
+            "id": "779_covidqa_1_0",
+            "retrieval_score": 0.60707438,
+            "final_weight": 2.94365993142128,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9007465839385986,
+            "text_preview": "title : suffering a loss is good fortune : myth or reality? passage : in the assessment of item discrimination, the discrimination index was computed by subtracting the mean score of participants in t…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.453606099999888,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.30331959999966784,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 5.156948199999533,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 5156.885299998976
+            }
+          },
+          "usage": {
+            "prompt_tokens": 968,
+            "completion_tokens": 222,
+            "total_tokens": 1190,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 5156.885299998976
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "The last step in the analysis was the creation of a longitudinal study to measure changes over time.",
+            "answer_type": "number",
+            "citations": [
+              "514_covidqa_0_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "514_covidqa_0_0",
+                "snippet": "we only conducted a cross - sectional study in study 3, whereas it would be preferable to measure chikui likelihood earlier and then track the material and mental benefit of our participants years later. in the absence of a longitudinal study, our findings are suggestive but do not prove causality, and the following two questions therefore remain unaddressed : we are unable to confirm whether the correlation found in study 2 means that it is the belief that boosts both financial and psychological well - being, rather than the reverse. only a longitudinal study can"
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "The last step in the analysis was the creation of a longitudinal study to measure changes over time.",
+          "citations": [
+            "514_covidqa_0_0"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              -2
+            ],
+            "top1_margin": 0.0,
+            "spearman_retrieval_vs_weight": -0.15811388300841897,
+            "kendall_retrieval_vs_weight": -0.25
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.12406947890818859,
+            "token_f1_max": 0.12371134020618557
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.3215898275375366,
+              "mean": 0.39403321146965026,
+              "max": 0.47735080122947693
+            },
+            "hit_rate": 0.8
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "555",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "Why is it proposed that some bat SL-CoVs may be able to directly infect human hosts?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.8103558999991947,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 2810.314300000755
+            }
+          },
+          "usage": {
+            "prompt_tokens": 154,
+            "completion_tokens": 94,
+            "total_tokens": 248,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 2810.314300000755
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "Bats are natural reservoirs for coronaviruses, and some bat SL-CoVs may have the ability to directly infect human hosts due to their close contact and shared environments.",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "Bats are natural reservoirs for coronaviruses, and some bat SL-CoVs may have the ability to directly infect human hosts due to their close contact and shared environments.",
+          "citations": [],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "proposed, directly, sl-covs",
+          "infect, human, hosts",
+          "some, able, bat",
+          "sars, sl, shc014",
+          "ma15, efficiently, cov"
+        ],
+        "mean_probe_similarity": 0.3342639207839966,
+        "probe_similarity_diversity": {
+          "min": 0.24029332399368286,
+          "mean": 0.3342639297246933,
+          "max": 0.49659162759780884
+        },
+        "retrieved_doc_ids": [
+          "550_covidqa_3_0",
+          "143_covidqa_0_0",
+          "553_covidqa_0_0",
+          "1676_covidqa_3_0",
+          "1119_covidqa_2_0"
+        ],
+        "retrieved_doc_scores": [
+          0.777350426,
+          0.746699572,
+          0.74651742,
+          0.740299165,
+          0.736925125
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "1119_covidqa_2_0",
+            "retrieval_score": 0.736925125,
+            "final_weight": 2.9079461991786957,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8526354432106018,
+            "text_preview": "title : accelerated viral dynamics in bat cell lines, with implications for zoonotic emergence passage : the findings may help to explain why bats are often the source for viruses that are deadly in h…"
+          },
+          {
+            "id": "1676_covidqa_3_0",
+            "retrieval_score": 0.740299165,
+            "final_weight": 2.901673138141632,
+            "citation_count": 5,
+            "redundancy_penalty": 0.865181565284729,
+            "text_preview": "title : characterization of a new member of alphacoronavirus with unique genomic features in rhinolophus bats passage : geographic isolation and host restrain. though collected from same province, the…"
+          },
+          {
+            "id": "143_covidqa_0_0",
+            "retrieval_score": 0.746699572,
+            "final_weight": 2.901061475276947,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8664048910140991,
+            "text_preview": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the possibility that bats were an animal host of mers - cov was initially widely discussed because of the existing diver…"
+          },
+          {
+            "id": "550_covidqa_3_0",
+            "retrieval_score": 0.777350426,
+            "final_weight": 2.870830774307251,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9268662929534912,
+            "text_preview": "title : no credible evidence supporting claims of the laboratory engineering of sars - cov - 2 passage : same contact sites as the human ace2 gene for interacting with sars cov, it was proposed that a…"
+          },
+          {
+            "id": "553_covidqa_0_0",
+            "retrieval_score": 0.74651742,
+            "final_weight": 2.870830774307251,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9268662929534912,
+            "text_preview": "title : no credible evidence supporting claims of the laboratory engineering of sars - cov - 2 passage : it was proposed that the s gene from bat - derived cov, unlike that from human patients - or ci…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.406100199999855,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.3107377999986056,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 6.50364030000128,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 6503.586099999666
+            }
+          },
+          "usage": {
+            "prompt_tokens": 1140,
+            "completion_tokens": 296,
+            "total_tokens": 1436,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 6503.586099999666
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "some bat SL-CoVs may directly infect human hosts",
+            "answer_type": "yesno",
+            "citations": [
+              "550_covidqa_3_0",
+              "553_covidqa_0_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "550_covidqa_3_0",
+                "snippet": "it was proposed that an intermediate host may not be necessary and that some bat sl - covs may be able to directly infect human hosts."
+              },
+              {
+                "doc_id": "553_covidqa_0_0",
+                "snippet": "it was proposed that the s gene from bat - derived cov, unlike that from human patients - or civetsderived viruses, was unable to use human ace2 as a receptor for entry into human cells. civets were proposed to be an intermediate host of the bat - covs, capable of spreading sars cov to humans. however, in 2013 several novel bat coronaviruses were isolated from chinese horseshoe bats and the bat sars - like or sl - cov - wiv1 was able to use ace2 from humans, civets and chinese horseshoe bats for entry. combined with evolutionary evidence that the bat ace2 gene has been positively selected at the"
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "some bat SL-CoVs may directly infect human hosts",
+          "citations": [
+            "550_covidqa_3_0",
+            "553_covidqa_0_0"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              -3,
+              -2
+            ],
+            "top1_margin": 0.006273061037063599,
+            "spearman_retrieval_vs_weight": -0.8207826816681233,
+            "kendall_retrieval_vs_weight": -0.7777777777777778
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.4,
+            "token_f1_max": 0.5454545454545454
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.24029332399368286,
+              "mean": 0.3342639297246933,
+              "max": 0.49659162759780884
+            },
+            "hit_rate": 1.0
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "538",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What hypotheses can explain this result?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 3.0437452999995003,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 3043.705400001272
+            }
+          },
+          "usage": {
+            "prompt_tokens": 142,
+            "completion_tokens": 113,
+            "total_tokens": 255,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 3043.705400001272
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "The result can be explained by the following hypotheses: (1) The experiment was conducted under controlled conditions, ensuring accurate measurements. (2) The sample used in the experiment was representative of the population. (3) The methodology employed in the experiment was valid and reliable.",
+            "answer_type": "list",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "The result can be explained by the following hypotheses: (1) The experiment was conducted under controlled conditions, ensuring accurate measurements. (2) The sample used in the experiment was representative of the population. (3) The methodology employed in the experiment was valid and reliable.",
+          "citations": [],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "hypotheses, explain, result",
+          "articles, include, number",
+          "alternatives, explorations, demonstrate",
+          "literature., interesting, exhaustive",
+          "restricted, proposed., different"
+        ],
+        "mean_probe_similarity": 0.4376409649848938,
+        "probe_similarity_diversity": {
+          "min": 0.3295654356479645,
+          "mean": 0.4376409471035004,
+          "max": 0.560504674911499
+        },
+        "retrieved_doc_ids": [
+          "1314_covidqa_0_0",
+          "1622_covidqa_2_0",
+          "963_covidqa_0_0",
+          "728_covidqa_3_0",
+          "826_covidqa_1_0"
+        ],
+        "retrieved_doc_scores": [
+          0.673060834,
+          0.670499206,
+          0.668732584,
+          0.664019048,
+          0.661371648
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "728_covidqa_3_0",
+            "retrieval_score": 0.664019048,
+            "final_weight": 3.069356292486191,
+            "citation_count": 5,
+            "redundancy_penalty": 0.736569344997406,
+            "text_preview": "title : cancer biomarker discovery : the entropic hallmark passage : this raised a suspicion about the true nature of this phenomenon. if the labelling is correct, this may indicate a subsampled group…"
+          },
+          {
+            "id": "1622_covidqa_2_0",
+            "retrieval_score": 0.670499206,
+            "final_weight": 3.0290600955486298,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8171617388725281,
+            "text_preview": "title : temporal trends in the discovery of human viruses passage : we confirmed that our model reproduced the observed slight downward trend in the rate of discovery since 1954 and the observed varia…"
+          },
+          {
+            "id": "826_covidqa_1_0",
+            "retrieval_score": 0.661371648,
+            "final_weight": 3.0290600955486298,
+            "citation_count": 5,
+            "redundancy_penalty": 0.8171617388725281,
+            "text_preview": "title : bayesian phylogeography finds its roots passage : we further annotated the tree nodes with their most probable in combination with other topological differences between the trees, this differe…"
+          },
+          {
+            "id": "1314_covidqa_0_0",
+            "retrieval_score": 0.673060834,
+            "final_weight": 2.9830076098442078,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9092667102813721,
+            "text_preview": "title : the failure of r ( 0 ) passage : in this paper, we outline the problems with r 0 and examine a number of alternatives that have been proposed. we include a worked example of malaria to demonst…"
+          },
+          {
+            "id": "963_covidqa_0_0",
+            "retrieval_score": 0.668732584,
+            "final_weight": 2.9830076098442078,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9092667102813721,
+            "text_preview": "title : the failure of r ( 0 ) passage : he demonstrated that all three statements can be false. the first, as we have noted, can fail due to the presence of backward bifurcations. the second can fail…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.448137899998983,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.2523085999982868,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 5.194222500000251,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 5194.1605000010895
+            }
+          },
+          "usage": {
+            "prompt_tokens": 969,
+            "completion_tokens": 206,
+            "total_tokens": 1175,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 5194.1605000010895
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "The result can be explained by experimental bias or subsampling.",
+            "answer_type": "span",
+            "citations": [
+              "728_covidqa_3_0",
+              "1314_covidqa_0_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "728_covidqa_3_0",
+                "snippet": "this may indicate a subsampled group of prostate cancer that has gleason 3 pattern characteristics but very low entropy. alternatively, it may indicate an experimental bias for reasons we can not explain with the available clinical information."
+              },
+              {
+                "doc_id": "1314_covidqa_0_0",
+                "snippet": "we outline the problems with r ( 0 ) and examine a number of alternatives that have been proposed."
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "The result can be explained by experimental bias or subsampling.",
+          "citations": [
+            "728_covidqa_3_0",
+            "1314_covidqa_0_0"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              3,
+              -3
+            ],
+            "top1_margin": 0.040296196937561035,
+            "spearman_retrieval_vs_weight": -0.5797509043642028,
+            "kendall_retrieval_vs_weight": -0.5
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.16279069767441862,
+            "token_f1_max": 0.13953488372093023
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.3295654356479645,
+              "mean": 0.4376409471035004,
+              "max": 0.560504674911499
+            },
+            "hit_rate": 0.8
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    },
+    {
+      "qid": "758",
+      "subset": "covidqa",
+      "split": "validation",
+      "question": "What is one reason for the lack of success of immunization phage displayed peptides with native protein?",
+      "gold_answer": null,
+      "vanilla": {
+        "prompt_template_id": "vanilla_json_v1",
+        "stages": {
+          "generate": {
+            "duration_s": 2.198034099999859,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 2197.9911000016727
+            }
+          },
+          "usage": {
+            "prompt_tokens": 155,
+            "completion_tokens": 67,
+            "total_tokens": 222,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 2197.9911000016727
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "Insufficient antigen presentation by host cells.",
+            "answer_type": "span",
+            "citations": [],
+            "evidence": [],
+            "confidence": 0.85,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "Insufficient antigen presentation by host cells.",
+          "citations": [],
+          "confidence": 0.85,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [],
+            "top1_margin": null,
+            "spearman_retrieval_vs_weight": null,
+            "kendall_retrieval_vs_weight": null
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.0,
+            "token_f1_max": 0.0
+          },
+          "probe_metrics": {}
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        }
+      },
+      "wrag": {
+        "prompt_template_id": "qa_json_v2",
+        "retriever_settings": {
+          "top_k": 5,
+          "n_probes": 5,
+          "filters": {
+            "config": {
+              "$in": [
+                "covidqa"
+              ]
+            }
+          }
+        },
+        "probes": [
+          "immunization, displayed, peptides",
+          "success, protein, reason",
+          "native, phage, lack",
+          "pathogens, vaccines, bioconjugation",
+          "bacteriophage, applications, incompletely"
+        ],
+        "mean_probe_similarity": 0.4234251081943512,
+        "probe_similarity_diversity": {
+          "min": 0.32649940252304077,
+          "mean": 0.42342512011528016,
+          "max": 0.6327084302902222
+        },
+        "retrieved_doc_ids": [
+          "738_covidqa_0_0",
+          "770_covidqa_0_0",
+          "738_covidqa_2_0",
+          "749_covidqa_3_0",
+          "756_covidqa_2_0"
+        ],
+        "retrieved_doc_scores": [
+          0.813737512,
+          0.79700911,
+          0.795113742,
+          0.790432394,
+          0.783210695
+        ],
+        "ranked_docs_sent": [
+          {
+            "id": "749_covidqa_3_0",
+            "retrieval_score": 0.790432394,
+            "final_weight": 2.972868889570236,
+            "citation_count": 5,
+            "redundancy_penalty": 0.90111243724823,
+            "text_preview": "title : beyond phage display : non - traditional applications of the filamentous bacteriophage as a vaccine carrier, therapeutic biologic, and bioconjugation scaffold passage : of improved or altered …"
+          },
+          {
+            "id": "770_covidqa_0_0",
+            "retrieval_score": 0.79700911,
+            "final_weight": 2.966296523809433,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9142571687698364,
+            "text_preview": "title : beyond phage display : non - traditional applications of the filamentous bacteriophage as a vaccine carrier, therapeutic biologic, and bioconjugation scaffold passage : more recently, peptide …"
+          },
+          {
+            "id": "756_covidqa_2_0",
+            "retrieval_score": 0.783210695,
+            "final_weight": 2.966296523809433,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9142571687698364,
+            "text_preview": "title : beyond phage display : non - traditional applications of the filamentous bacteriophage as a vaccine carrier, therapeutic biologic, and bioconjugation scaffold passage : although our understand…"
+          },
+          {
+            "id": "738_covidqa_0_0",
+            "retrieval_score": 0.813737512,
+            "final_weight": 2.9662336111068726,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9143829941749573,
+            "text_preview": "title : beyond phage display : non - traditional applications of the filamentous bacteriophage as a vaccine carrier, therapeutic biologic, and bioconjugation scaffold passage : of active research for …"
+          },
+          {
+            "id": "738_covidqa_2_0",
+            "retrieval_score": 0.795113742,
+            "final_weight": 2.9662336111068726,
+            "citation_count": 5,
+            "redundancy_penalty": 0.9143829941749573,
+            "text_preview": "title : beyond phage display : non - traditional applications of the filamentous bacteriophage as a vaccine carrier, therapeutic biologic, and bioconjugation scaffold passage : despite this, the filam…"
+          }
+        ],
+        "stages": {
+          "probe": {
+            "duration_s": 5.978010099999665,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "reweigh": {
+            "duration_s": 0.37171110000053886,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          },
+          "generate": {
+            "duration_s": 3.7446842000008473,
+            "gpu_energy_j": null,
+            "cpu_energy_j": null
+          }
+        },
+        "llm": {
+          "engine": {
+            "backend": "openrouter",
+            "model": "deepseek/deepseek-r1-distill-llama-8b",
+            "sampler": {
+              "temperature": 0.2,
+              "max_tokens": 512
+            },
+            "timing": {
+              "ttft_ms": null,
+              "gen_ms": 3744.6266999995714
+            }
+          },
+          "usage": {
+            "prompt_tokens": 1098,
+            "completion_tokens": 127,
+            "total_tokens": 1225,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": null
+          },
+          "timing": {
+            "ttft_ms": null,
+            "gen_ms": 3744.6266999995714
+          },
+          "cost_usd": null,
+          "output": {
+            "answer": "The lack of success is due to peptides not adequately mimicking epitopes on folded proteins.",
+            "answer_type": "span",
+            "citations": [
+              "738_covidqa_0_0"
+            ],
+            "evidence": [
+              {
+                "doc_id": "738_covidqa_0_0",
+                "snippet": "peptides incompletely or inadequately mimic epitopes on folded proteins"
+              }
+            ],
+            "confidence": 0.8,
+            "conflict": false,
+            "conflict_note": "",
+            "abstain": false
+          },
+          "error": null
+        },
+        "metrics": {
+          "answer": "The lack of success is due to peptides not adequately mimicking epitopes on folded proteins.",
+          "citations": [
+            "738_covidqa_0_0"
+          ],
+          "confidence": 0.8,
+          "abstained": false,
+          "quality": {
+            "em": 0,
+            "f1": 0.0,
+            "numeric_tolerance_ok": false,
+            "date_year_ok": false
+          },
+          "retrieval": {
+            "answer_present_at_5": 0,
+            "mrr@10": 0.0,
+            "ndcg@10": 0.0
+          },
+          "reweighting": {
+            "rank_delta_support_docs": [
+              -3
+            ],
+            "top1_margin": 0.006572365760803223,
+            "spearman_retrieval_vs_weight": -0.5797509043642028,
+            "kendall_retrieval_vs_weight": -0.5
+          },
+          "citations_valid": true,
+          "evidence_overlap": {
+            "char_jaccard_max": 0.46534653465346537,
+            "token_f1_max": 0.43478260869565216
+          },
+          "probe_metrics": {
+            "compliance_rate": 1.0,
+            "diversity": {
+              "min": 0.32649940252304077,
+              "mean": 0.42342512011528016,
+              "max": 0.6327084302902222
+            },
+            "hit_rate": 0.8
+          }
+        },
+        "robustness": {
+          "repeats": 1,
+          "confidence_std": 0.0,
+          "levenshtein_mean": null
+        },
+        "decomposed": false,
+        "parts": null
+      }
+    }
+  ],
+  "aggregate": {
+    "vanilla": {
+      "N": 10,
+      "EM_mean": 0.0,
+      "F1_mean": 0.0,
+      "Numeric_tolerance_rate": 0.0,
+      "Year_match_rate": 0.0,
+      "AnswerPresent@5": 0.0,
+      "MRR@10": 0.0,
+      "NDCG@10": 0.0,
+      "Cost_mean_USD": null,
+      "Latency_gen_ms_mean": 2688.219620000018,
+      "Prompt_tokens_mean": 148.4,
+      "Completion_tokens_mean": 81.2,
+      "Abstain_rate": 0.0,
+      "ECE_overall": 0.82,
+      "Cost_per_correct": null,
+      "Latency_per_correct_ms": null,
+      "Tokens_per_correct": null,
+      "Robustness": {
+        "confidence_std_mean": 0.0,
+        "levenshtein_mean_across_repeats": null
+      }
+    },
+    "wrag": {
+      "N": 10,
+      "EM_mean": 0.0,
+      "F1_mean": 0.0,
+      "Numeric_tolerance_rate": 0.0,
+      "Year_match_rate": 0.0,
+      "AnswerPresent@5": 0.0,
+      "MRR@10": 0.0,
+      "NDCG@10": 0.0,
+      "Cost_mean_USD": null,
+      "Latency_gen_ms_mean": 4967.385390000345,
+      "Prompt_tokens_mean": 1032.7,
+      "Completion_tokens_mean": 200.7,
+      "Abstain_rate": 0.0,
+      "ECE_overall": 0.8099999999999999,
+      "Cost_per_correct": null,
+      "Latency_per_correct_ms": null,
+      "Tokens_per_correct": null,
+      "Robustness": {
+        "confidence_std_mean": 0.0,
+        "levenshtein_mean_across_repeats": null
+      }
+    },
+    "delta_wrag_minus_vanilla": {
+      "EM_mean": 0.0,
+      "F1_mean": 0.0,
+      "Numeric_tolerance_rate": 0.0,
+      "Year_match_rate": 0.0,
+      "AnswerPresent@5": 0.0,
+      "MRR@10": 0.0,
+      "NDCG@10": 0.0,
+      "Cost_mean_USD": null,
+      "Latency_gen_ms_mean": 2279.165770000327,
+      "Prompt_tokens_mean": 884.3000000000001,
+      "Completion_tokens_mean": 119.49999999999999,
+      "Abstain_rate": 0.0,
+      "ECE_overall": -0.010000000000000009,
+      "Cost_per_correct": null,
+      "Latency_per_correct_ms": null,
+      "Tokens_per_correct": null
+    }
+  },
+  "time_saved_at": "2025-08-28 16:49:59"
+}

@@ -1,0 +1,130 @@
+{
+  "question": "Where did the first known cases of MERS occur?",
+  "subset": "covidqa",
+  "top_k": 5,
+  "n_probes": 5,
+  "result": {
+    "question": "Where did the first known cases of MERS occur?",
+    "probes": [
+      "first, known, cases",
+      "occur, mers, coronavirus",
+      "respiratory, reported, cov",
+      "retrospectively., epidemiology, transmission",
+      "diagnostics, infections., associated"
+    ],
+    "mean_probe_similarity": 0.45223426818847656,
+    "probe_similarity_matrix": [
+      [
+        1.0,
+        0.3441174626350403,
+        0.3510553538799286,
+        0.3738694489002228,
+        0.43564680218696594
+      ],
+      [
+        0.3441174626350403,
+        1.0,
+        0.5136134624481201,
+        0.484948992729187,
+        0.5211451053619385
+      ],
+      [
+        0.3510553538799286,
+        0.5136134624481201,
+        1.000000238418579,
+        0.4593343734741211,
+        0.5194262862205505
+      ],
+      [
+        0.3738694489002228,
+        0.484948992729187,
+        0.4593343734741211,
+        0.9999998807907104,
+        0.5191857814788818
+      ],
+      [
+        0.43564680218696594,
+        0.5211451053619385,
+        0.5194262862205505,
+        0.5191857814788818,
+        1.0
+      ]
+    ],
+    "pinecone_results": {
+      "matches": [
+        {
+          "id": "141_covidqa_0_0",
+          "score": 0.751599371,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 0.0,
+            "example_id": "141",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown"
+          }
+        },
+        {
+          "id": "1179_covidqa_3_0",
+          "score": 0.744295478,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 3.0,
+            "example_id": "1179",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the first known mers human - to - human transmission event was one characterized by acute lrt disease in a healthcare setting in jordan. in stark contrast, a sero - survey of hcw who were sometimes in close and prolonged contact with the first, fatal mers - cov case in 2012, found none of the hcw had seroconverted four months later, despite an absence of eye protection and variable compliance with required ppe standards."
+          }
+        },
+        {
+          "id": "1159_covidqa_1_0",
+          "score": 0.74068,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 1.0,
+            "example_id": "1159",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : in 2015 two large outbreaks occurred. south korea was the site of the first large scale outbreak outside the arabian peninsula and produced the first cases in both south korea and china, occurring between may and july 2015. this was closely followed by a distinct outbreak in ar riyad province in the ksa which appeared to come under control in early november."
+          }
+        },
+        {
+          "id": "1236_covidqa_2_0",
+          "score": 0.730401039,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 2.0,
+            "example_id": "1236",
+            "text": "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the first who case definition defined probable cases of mers based on the presence of febrile illness, cough and requirement for hospitalization with suspicion of lower respiratory tract involvement. it also included roles for contact with a probable or confirmed case or for travel or residence within the arabian peninsula. if strictly adhered to, only the severe syndrome would be subject to laboratory testing, which was the paradigm early on. from july 2013, the revised who case definition included the importance of seeking out and understanding the role of asymptomatic cases and from june 2014, the who definition more"
+          }
+        },
+        {
+          "id": "1159_covidqa_3_0",
+          "score": 0.714998901,
+          "values": [],
+          "metadata": {
+            "chunk_index": 0.0,
+            "config": "covidqa",
+            "doc_index": 3.0,
+            "example_id": "1159",
+            "text": "title : demographic variations of mers - cov infection among suspected and confirmed cases : an epidemiological analysis of laboratory - based data from riyadh regional laboratory passage : text : a respiratory viral disease caused by the middle east respiratory syndrome coronavirus was first isolated in 2012, in a 60 - year - old man who died in jeddah, ksa due to severe acute pneumonia and multiple organ failure. since then, 27 countries have reported the presence of this virus, including the 12 countries of the eastern mediterranean region. several outbreaks have occurred in multiple countries including saudi arabia, the united arab emirates and the republic of korea. recent fatality rate of 21 %. very limited evidence is available for exploring the epidemiology of this virus among the pediatric population."
+          }
+        }
+      ],
+      "namespace": "ragbench",
+      "usage": {
+        "read_units": 1
+      }
+    },
+    "top_docs": [
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : abstract : the first known cases of middle east respiratory syndrome, associated with infection by a novel coronavirus, occurred in 2012 in jordan but were reported retrospectively. the case first to be publicly reported was from jeddah, in the kingdom of saudi arabia. since then, mers - cov sequences have been found in a bat and in many dromedary camels. mers - cov is enzootic in dc across the arabian peninsula and in parts of africa, causing mild upper respiratory tract illness in its camel reservoir and sporadic, but relatively rare human infections. precisely how virus transmits to humans remains unknown",
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the first known mers human - to - human transmission event was one characterized by acute lrt disease in a healthcare setting in jordan. in stark contrast, a sero - survey of hcw who were sometimes in close and prolonged contact with the first, fatal mers - cov case in 2012, found none of the hcw had seroconverted four months later, despite an absence of eye protection and variable compliance with required ppe standards.",
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : in 2015 two large outbreaks occurred. south korea was the site of the first large scale outbreak outside the arabian peninsula and produced the first cases in both south korea and china, occurring between may and july 2015. this was closely followed by a distinct outbreak in ar riyad province in the ksa which appeared to come under control in early november.",
+      "title : mers coronavirus : diagnostics, epidemiology and transmission passage : the first who case definition defined probable cases of mers based on the presence of febrile illness, cough and requirement for hospitalization with suspicion of lower respiratory tract involvement. it also included roles for contact with a probable or confirmed case or for travel or residence within the arabian peninsula. if strictly adhered to, only the severe syndrome would be subject to laboratory testing, which was the paradigm early on. from july 2013, the revised who case definition included the importance of seeking out and understanding the role of asymptomatic cases and from june 2014, the who definition more",
+      "title : demographic variations of mers - cov infection among suspected and confirmed cases : an epidemiological analysis of laboratory - based data from riyadh regional laboratory passage : text : a respiratory viral disease caused by the middle east respiratory syndrome coronavirus was first isolated in 2012, in a 60 - year - old man who died in jeddah, ksa due to severe acute pneumonia and multiple organ failure. since then, 27 countries have reported the presence of this virus, including the 12 countries of the eastern mediterranean region. several outbreaks have occurred in multiple countries including saudi arabia, the united arab emirates and the republic of korea. recent fatality rate of 21 %. very limited evidence is available for exploring the epidemiology of this virus among the pediatric population."
+    ]
+  },
+  "saved_at": "2025-08-28 12:08:01"
+}
