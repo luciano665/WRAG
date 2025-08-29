@@ -203,9 +203,9 @@ def main():
     # RAGBench batch
     if args.ragbench:
         if get_ragbench_questions is None:
-            raise SystemExit("ragbench_qeustion.py not found or import failed.")
+            raise SystemExit("ragbench_questions.py not found or import failed.")
         
-        subsets = args.rb_subsset or None
+        subsets = args.rb_subset or None
         splits = tuple(args.rb_split) if args.rb_split else ("train", "validation", "test")
 
         try:
