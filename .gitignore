@@ -12,3 +12,6 @@ secrets.env
 results/*.tmp
 requirements.txt
 activate_env.sh
+*.log
+*.tmp
+results/*.tmp
