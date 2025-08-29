@@ -10,3 +10,5 @@ secrets.env
 .vscode/
 .idea/
 results/*.tmp
+requirements.txt
+activate_env.sh
