@@ -77,7 +77,9 @@ def get_ragbench_questions(
     subsets: Optional[Sequence[str]] = None,
     splits: Sequence[str] = DEFAULT_SPLITS,
     include_ids: bool = False,
+    include_response: bool = False,
     auto_install: bool = False,
+    limit: Optional[int] = None,
 ) -> List[str]:
     """
     Return a flat list of questions across requested subsets & splits.
@@ -87,6 +89,11 @@ def get_ragbench_questions(
         splits: iterable of split names; default: ("train","validation","test")
         include_ids: if True -> JSON strings with {"id", "question"}. Else raw question strings.
         auto_install: if True, tries `pip install datasets` if missing.
+    
+    If include_response=True:
+        - Returns JSON strings with at least {"question","response"}.
+        - If include_ids=True and 'id' exists -> include "id".
+        - Skips rows/splits missing the 'response' column (since needed for eval).
     """
     _ensure_datasets_installed(auto_install=auto_install)
     hf_token = _get_hf_token()
@@ -95,8 +102,11 @@ def get_ragbench_questions(
         subsets = DEFAULT_SUBSETS
 
     out: List[str] = []
+    count = 0
     for subset in subsets:
         for split in splits:
+            if limit is not None and count >= limit:
+                break
             try:
                 ds = _load_with_owner_fallback(subset, split, hf_token)
             except Exception:
@@ -104,13 +114,40 @@ def get_ragbench_questions(
 
             if "question" not in ds.column_names:
                 continue
-
-            if include_ids:
-                ids = ds["id"] if "id" in ds.column_names else [None] * len(ds)
-                for _id, q in zip(ids, ds["question"]):
-                    out.append(json.dumps({"id": _id, "question": q}, ensure_ascii=False))
+            if include_response:
+                if "response" not in ds.column_names:
+                    # If response need for eval, skip this split
+                    continue
+                have_id = include_ids and ("id" in ds.column_names)
+                for i in range(len(ds)):
+                    if limit is not None and count >= limit:
+                        break
+                    record = {
+                        "question": ds["question"][i],
+                        "response": ds["response"][i],
+                    }
+                    if have_id:
+                        record["id"] = ds["id"][i]
+                    out.append(json.dumps(record, ensure_ascii=False))
+                    count += 1
             else:
-                out.extend(ds["question"])
+                if include_ids:
+                    have_id = "id" in ds.column_names
+                    ids = ds["id"] if have_id else [None] * len(ds)
+                    for i in range(len(ds)):
+                        if limit is not None and count >= limit:   
+                            break
+                        out.append(json.dumps({"id": ids[i], "question": ds["question"][i]}, ensure_ascii=False))
+                        count += 1
+                else:
+                    for q in ds["question"]:
+                        if limit is not None and count >= limit:   
+                            break
+                        out.append(q)
+                        count += 1
+
+        if limit is not None and count >= limit:   
+            break
     return out
 
 def get_ragbench_questions_df(
@@ -143,11 +180,25 @@ def get_ragbench_questions_df(
             if "question" not in ds.column_names:
                 continue
 
-            ids = ds["id"] if "id" in ds.column_names else [None] * len(ds)
-            for _id, q in zip(ids, ds["question"]):
-                rows.append({"subset": subset, "split": split, "id": _id, "question": q})
-    
-    return pd.DataFrame(rows, columns=["subset", "split", "id", "question"])
+            has_id = "id" in ds.column_names
+            has_resp = "response" in ds.column_names
+            n = len(ds)
+
+            for i in range(n):
+                row = {
+                    "subset": subset,
+                    "split": split,
+                    "id": ds["id"][i] if has_id else None,
+                    "question": ds["question"][i],
+                }
+                if has_resp:
+                    row["response"] = ds["response"][i]
+                rows.append(row)
+    # Coluns includes response if any row had it
+    columns = ["subset", "split", "id", "question"]
+    if any("response" in r for r in rows):
+        columns.append("response")
+    return pd.DataFrame(rows, columns=columns)
 
 # CLI
 def _parse_args() -> argparse.Namespace:
@@ -155,7 +206,9 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--subset", action="append", help="Subset name (repeatable), e.g. --subset hotpotqa")
     p.add_argument("--split", action="append", help="Split(s) to include (repeatable). Default: train,validation,test")
     p.add_argument("--include-ids", action="store_true", help="Emit JSONL {id, question} lines")
+    p.add_argument("--include-response", action="store_true", help="Emit JSONL with {'question','response',('id')}")
     p.add_argument("--out", type=str, default="-", help="Output file path or '-' for stdout (default)")
+    p.add_argument("--limit", type=int, default=None, help="Maximum number of rows to emit")
     p.add_argument("--auto-install", action="store_true", help="Auto-install `datasets` if missing")
     return p.parse_args()
 
@@ -168,7 +221,9 @@ def main_cli():
         subsets=subsets,
         splits=splits,
         include_ids=args.include_ids,
+        include_response=args.include_response,
         auto_install=args.auto_install,
+        limit=args.limit,
     )
 
     if args.out == "-":
