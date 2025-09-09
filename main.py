@@ -186,7 +186,10 @@ def main():
                         help="How many RAGBench questions to run (default: 10)")
     parser.add_argument("--rb-auto-install", action="store_true",
                         help="Auto-install `datasets` in ragbench helper if missing")
-    
+    parser.add_argument("--rb-include-ids", action="store_true",
+                        help="Request JSONL {id, question} from helper.")
+    parser.add_argument("--rb-include-response", action="store_true",
+                        help="Request JSONL {question, response, (id)}. Skips splits without 'response'.")
 
     # Retrieval controls
     parser.add_argument("--top-k", type=int, default=5, help="Top-K docs to retrieve (unique) (default: 5).")
