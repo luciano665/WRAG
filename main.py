@@ -398,7 +398,7 @@ def main():
                         print(f"\nSaved final answer to: {args.save_answer}")
             # If gold response exist, will shot it
             if args.rb_include_response and golds[idx0] is not None:
-                print("\n[gold repsonse]")
+                print("\n[gold response]")
                 print(golds[idx0])
 
         return 
