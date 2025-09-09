@@ -129,45 +129,47 @@ def generate_final_answer(question: str, weighted_docs: list,
     raise RuntimeError("Gemini rate limit/quota reached repeatedly.")
 
     # Helper function to normalize lines when flags are included (resposes/IDs)
-    def _normalize_questions_from_helper(
-        lines: Sequence[str],
-        include_ids: bool,
-        include_response: bool,
-    ) -> Tuple[List[str], List[Optional[Any]], List[Optional[str]]]:
-        """
-        Returns:
-        - Questions
-        - IDs
-        - gold responses
-        """
-        questions: List[str] = []
-        ids: List[Optional[Any]] = []
-        gold: List[Optional[str]] = []
+def _normalize_questions_from_helper(
+    lines: Sequence[str],
+    include_ids: bool,
+    include_response: bool,
+) -> Tuple[List[str], List[Optional[Any]], List[Optional[str]]]:
+    """
+    Returns:
+      questions: List[str]
+      ids:       List[Optional[Any]]
+      gold:      List[Optional[str]]
+    """
+    questions: List[str] = []
+    ids: List[Optional[Any]] = []
+    gold: List[Optional[str]] = []
 
-        if include_ids or include_response:
-            for line in lines:
-                try:
-                    obj = json.loads(line)
-                except Exception:
-                    q = str(line).strip()
-                    if q:
-                        questions.append(q)
-                        ids.append(None)
-                        gold.append(None)
-                    continue
-                q = obj.get("question")
-                if isinstance(q, str) and q.strip():
-                    questions.append(q)
-                    ids.append(obj.get("id"))
-                    gold.append(obj.get("response") if include_response else None)
-        else:
-            for line in lines:
-                q = str(line).strip()
+    if include_ids or include_response:
+        for ln in lines:
+            try:
+                obj = json.loads(ln)
+            except Exception:
+                q = str(ln).strip()
                 if q:
                     questions.append(q)
                     ids.append(None)
                     gold.append(None)
-        return questions, ids, gold
+                continue
+
+            q = obj.get("question")
+            if isinstance(q, str) and q.strip():
+                questions.append(q.strip())
+                ids.append(obj.get("id"))
+                gold.append(obj.get("response") if include_response else None)
+    else:
+        for ln in lines:
+            q = str(ln).strip()
+            if q:
+                questions.append(q)
+                ids.append(None)
+                gold.append(None)
+
+    return questions, ids, gold
 
 def main():
     parser = argparse.ArgumentParser(
@@ -257,10 +259,19 @@ def main():
         splits = tuple(args.rb_split) if args.rb_split else ("train", "validation", "test")
 
         try:
-            questions = get_ragbench_questions(
+            lines = get_ragbench_questions(
                 subsets=subsets,
                 splits=splits,
+                include_ids=args.rb_include_ids,
+                include_response=args.rb_include_response,
                 auto_install=args.rb_auto_install
+            )
+
+            # Normalization to (questions, ids, golds)
+            questions, qids, golds = _normalize_questions_from_helper(
+                lines=lines,
+                include_ids=args.rb_include_ids,
+                include_response=args.rb_include_response,
             )
         except Exception as e:
             raise SystemExit(f"Failed to load RAGBench questions: {e}")
@@ -327,7 +338,7 @@ def main():
                           f"{d['redundancy_penalty']:>5.2f}  {d['retrieval_score']:>6.3f}  "
                           f"{d['id']}  |  {preview}")
 
-            # Save probe+reweigh JSON (optional) — NOTE: this overwrites for each Q if you reuse the same path
+            # Save probe+reweigh JSON (optional) — This overwrites for each Q if you reuse the same path
             if args.save:
                 os.makedirs(os.path.dirname(args.save) or ".", exist_ok=True)
                 payload = {
