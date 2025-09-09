@@ -284,12 +284,12 @@ def main():
               f"(subsets={subsets or 'ALL'}, splits={splits})")
             
         
-        for idx, q in enumerate(questions[:limit], start=1):
+        for idx0, q in enumerate(questions[:limit]):
             question = q.strip()
             if not question:
                 continue
 
-            print(f"\n========== RAGBench Q{idx}: {question} ==========")
+            print(f"\n========== RAGBench Q{idx0+1}: {question} ==========")
 
             # === Probe Stage ===
             stage = run_probe_stage(
@@ -397,9 +397,9 @@ def main():
                             f.write(answer_text if isinstance(answer_text, str) else json.dumps(answer_text))
                         print(f"\nSaved final answer to: {args.save_answer}")
             # If gold response exist, will shot it
-            if args.rb_include_reponse and golds[idx] is not None:
+            if args.rb_include_response and golds[idx0] is not None:
                 print("\n[gold repsonse]")
-                print(golds[idx])
+                print(golds[idx0])
 
         return 
 
