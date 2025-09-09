@@ -396,6 +396,10 @@ def main():
                         with open(args.save_answer, "w", encoding="utf-8") as f:
                             f.write(answer_text if isinstance(answer_text, str) else json.dumps(answer_text))
                         print(f"\nSaved final answer to: {args.save_answer}")
+            # If gold response exist, will shot it
+            if args.rb_include_reponse and golds[idx] is not None:
+                print("\n[gold repsonse]")
+                print(golds[idx])
 
         return 
 
