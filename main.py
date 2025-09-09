@@ -3,6 +3,9 @@ import os
 import json
 import argparse
 import numpy as np
+from typing import Any, List, Optional, Sequence, Tuple
+
+from reweight_stage import q
 
 # --- Load env BEFORE importing other modules (so os.getenv works) ---
 try:
@@ -125,6 +128,47 @@ def generate_final_answer(question: str, weighted_docs: list,
             time.sleep(wait)
     raise RuntimeError("Gemini rate limit/quota reached repeatedly.")
 
+    # Helper function to normalize lines when flags are included (resposes/IDs)
+    def _normalize_questions_from_helper(
+        lines: Sequence[str],
+        include_ids: bool,
+        include_response: bool,
+    ) -> Tuple[List[str], List[Optional[Any]], List[Optional[str]]]:
+        """
+        Returns:
+        - Questions
+        - IDs
+        - gold responses
+        """
+        questions: List[str] = []
+        ids: List[Optional[Any]] = []
+        gold: List[Optional[str]] = []
+
+        if include_ids or include_response:
+            for line in lines:
+                try:
+                    obj = json.loads(line)
+                except Exception:
+                    q = str(line).strip()
+                    if q:
+                        questions.append(q)
+                        ids.append(None)
+                        gold.append(None)
+                    continue
+                q = obj.get("question")
+                if isinstance(q, str) and q.strip():
+                    questions.append(q)
+                    ids.append(obj.get("id"))
+                    gold.append(obj.get("response") if include_response else None)
+        else:
+            for line in lines:
+                q = str(line).strip()
+                if q:
+                    questions.append(q)
+                    ids.append(None)
+                    gold.append(None)
+        return questions, ids, gold
+
 def main():
     parser = argparse.ArgumentParser(
         description="WRAG: run probe stage, reweigh, and final answer generation."
@@ -142,6 +186,7 @@ def main():
                         help="How many RAGBench questions to run (default: 10)")
     parser.add_argument("--rb-auto-install", action="store_true",
                         help="Auto-install `datasets` in ragbench helper if missing")
+    
 
     # Retrieval controls
     parser.add_argument("--top-k", type=int, default=5, help="Top-K docs to retrieve (unique) (default: 5).")
